@@ -24,7 +24,7 @@ const kommuneTemplate = `<!DOCTYPE html>
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://hundeforsikring.dk/forsikring/{KOMMUNE_SLUG}/">
     
-    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/style.css?v=20250102">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
@@ -263,9 +263,8 @@ function getCheapestPrice(kommune) {
 
 // Function to count available providers for a kommune
 function getAvailableProviders(kommune) {
-    return forsikringData.filter(item => 
-        item.kommuner && item.kommuner.includes(kommune)
-    ).length;
+    // All providers are available in all kommuner
+    return forsikringData.length;
 }
 
 // Generate pages for each kommune
