@@ -3,6 +3,22 @@
 // Global data storage
 let kommunerData = ['Aarhus', 'Aalborg', 'Odense', 'København', 'Esbjerg', 'Randers', 'Kolding', 'Horsens', 'Vejle', 'Roskilde', 'Herning', 'Silkeborg', 'Næstved', 'Fredericia', 'Viborg', 'Køge', 'Holstebro', 'Slagelse', 'Hillerød', 'Ballerup', 'Rødovre', 'Glostrup', 'Brøndby', 'Hvidovre', 'Gentofte', 'Lyngby-Taarbæk', 'Gladsaxe', 'Rudersdal', 'Furesø', 'Allerød', 'Fredensborg', 'Helsingør', 'Hørsholm', 'Frederikssund', 'Egedal', 'Frederiksværk-Hundested', 'Greve', 'Solrød', 'Lejre', 'Holbæk', 'Kalundborg', 'Ringsted', 'Sorø', 'Vordingborg', 'Guldborgsund', 'Lolland', 'Bornholm', 'Haderslev', 'Billund', 'Sønderborg', 'Tønder', 'Fanø', 'Varde', 'Vejen', 'Aabenraa', 'Ikast-Brande', 'Ringkøbing-Skjern', 'Lemvig', 'Struer', 'Syddjurs', 'Norddjurs', 'Favrskov', 'Odder', 'Samsø', 'Assens', 'Faaborg-Midtfyn', 'Kerteminde', 'Nyborg', 'Svendborg', 'Nordfyns', 'Langeland', 'Ærø', 'Brønderslev', 'Frederikshavn', 'Hjørring', 'Jammerbugt', 'Læsø', 'Mariagerfjord', 'Morsø', 'Rebild', 'Thisted', 'Vesthimmerland', 'Skive', 'Høje-Taastrup', 'Ishøj', 'Tårnby', 'Dragør', 'Halsnæs', 'Gribskov', 'Odsherred', 'Faxe', 'Stevns', 'Høje-Taastrup', 'Ishøj', 'Tårnby', 'Dragør', 'Halsnæs', 'Gribskov'];
 
+// Global coordination to prevent duplicate grid population
+window.gridPopulationLock = {
+    isLocked: false,
+    lock: function() {
+        this.isLocked = true;
+        console.log('🔒 Grid population locked');
+    },
+    unlock: function() {
+        this.isLocked = false;
+        console.log('🔓 Grid population unlocked');
+    },
+    isLocked: function() {
+        return this.isLocked;
+    }
+};
+
 // Initialize the application
 document.addEventListener('DOMContentLoaded', function() {
     console.log('🚀 Initializing Hundeforsikring app...');
@@ -106,6 +122,31 @@ function initializeKommuneGrid() {
         return;
     }
 
+    // Check global lock to prevent conflicts with other scripts
+    if (window.gridPopulationLock && window.gridPopulationLock.isLocked()) {
+        console.log('⚠️ Grid population is locked by another script, skipping...');
+        return;
+    }
+
+    // Prevent multiple executions - check if already populated
+    if (kommuneGrid.dataset.populated === 'true') {
+        console.log('⚠️ Kommune grid already populated, skipping...');
+        return;
+    }
+
+    // Lock the grid population
+    if (window.gridPopulationLock) {
+        window.gridPopulationLock.lock();
+    }
+
+    // Remove any existing show more buttons first to prevent duplicates
+    const existingButtons = kommuneGrid.parentNode.querySelectorAll('div[style*="text-align: center"]');
+    existingButtons.forEach(btn => btn.remove());
+
+    // Also remove buttons with class-based selectors
+    const existingClassButtons = kommuneGrid.parentNode.querySelectorAll('.show-more-button-container');
+    existingClassButtons.forEach(btn => btn.remove());
+
     // Show first 24 kommuner initially
     const initialKommuner = kommunerData.slice(0, 24);
     
@@ -119,6 +160,7 @@ function initializeKommuneGrid() {
     // Add "Show more" button if there are more kommuner
     if (kommunerData.length > 24) {
         const showMoreContainer = document.createElement('div');
+        showMoreContainer.className = 'show-more-button-container';
         showMoreContainer.style.textAlign = 'center';
         showMoreContainer.style.marginTop = '2rem';
         
@@ -130,6 +172,9 @@ function initializeKommuneGrid() {
         showMoreContainer.appendChild(showMoreBtn);
         kommuneGrid.parentNode.appendChild(showMoreContainer);
     }
+
+    // Mark as populated to prevent duplicate execution
+    kommuneGrid.dataset.populated = 'true';
     
     console.log('✅ Kommune grid initialized with', initialKommuner.length, 'kommuner');
 }
@@ -140,6 +185,10 @@ function showAllKommuner() {
     const kommuneGrid = document.getElementById('kommuneGrid');
     if (!kommuneGrid) return;
 
+    // Remove all existing show more buttons first
+    const existingButtons = kommuneGrid.parentNode.querySelectorAll('.show-more-button-container');
+    existingButtons.forEach(btn => btn.remove());
+
     kommuneGrid.innerHTML = kommunerData.map(kommune => `
         <div class="kommune-card" onclick="navigateToForsikringKommune('${kommune}')">
             <h4>${kommune}</h4>
@@ -147,11 +196,8 @@ function showAllKommuner() {
         </div>
     `).join('');
 
-    // Remove the "Show more" button
-    const showMoreContainer = kommuneGrid.parentNode.querySelector('div[style*="text-align: center"]');
-    if (showMoreContainer) {
-        showMoreContainer.remove();
-    }
+    // Reset populated state since we've changed the content
+    kommuneGrid.dataset.populated = 'false';
     
     console.log('✅ All kommuner displayed');
 }

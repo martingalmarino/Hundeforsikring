@@ -498,21 +498,36 @@ function populateMobileCards(data) {
 function populateKommuneGrid() {
     const kommuneGrid = document.getElementById('kommuneGrid');
     if (!kommuneGrid || !window.kommunerData || window.kommunerData.length === 0) {
-        console.log('No kommune data available');
+        console.log('⚠️ No kommune data available');
         return;
     }
 
-    // Prevent multiple executions
+    // Check global lock to prevent conflicts with other scripts
+    if (window.gridPopulationLock && window.gridPopulationLock.isLocked()) {
+        console.log('⚠️ Grid population is locked by another script, skipping...');
+        return;
+    }
+
+    // Prevent multiple executions - check if already populated
     if (kommuneGrid.dataset.populated === 'true') {
-        console.log('Kommune grid already populated, skipping...');
+        console.log('⚠️ Kommune grid already populated, skipping...');
         return;
     }
 
-    console.log('Populating kommune grid with', window.kommunerData.length, 'kommuner');
+    // Lock the grid population
+    if (window.gridPopulationLock) {
+        window.gridPopulationLock.lock();
+    }
 
-    // Remove any existing show more buttons first
+    console.log('🏘️ Populating kommune grid with', window.kommunerData.length, 'kommuner');
+
+    // Remove any existing show more buttons first to prevent duplicates
     const existingButtons = kommuneGrid.parentNode.querySelectorAll('.show-more-button-container');
     existingButtons.forEach(btn => btn.remove());
+
+    // Also remove any buttons with inline styles that might be duplicates
+    const existingInlineButtons = kommuneGrid.parentNode.querySelectorAll('div[style*="text-align: center"]');
+    existingInlineButtons.forEach(btn => btn.remove());
 
     // Show first 24 kommuner initially
     const initialKommuner = window.kommunerData.slice(0, 24);
@@ -546,18 +561,25 @@ function populateKommuneGrid() {
         kommuneGrid.parentNode.appendChild(showMoreContainer);
     }
 
-    // Mark as populated
+    // Mark as populated to prevent duplicate execution
     kommuneGrid.dataset.populated = 'true';
+    
+    console.log('✅ Kommune grid populated successfully');
 }
 
 // Show all kommuner for forsikring
 function showAllForsikringKommuner() {
+    console.log('📋 Showing all kommuner for forsikring...');
     const kommuneGrid = document.getElementById('kommuneGrid');
     if (!kommuneGrid || !window.kommunerData) return;
 
     // Remove all existing show more buttons
     const existingButtons = kommuneGrid.parentNode.querySelectorAll('.show-more-button-container');
     existingButtons.forEach(btn => btn.remove());
+
+    // Also remove any buttons with inline styles that might be duplicates
+    const existingInlineButtons = kommuneGrid.parentNode.querySelectorAll('div[style*="text-align: center"]');
+    existingInlineButtons.forEach(btn => btn.remove());
 
     kommuneGrid.innerHTML = window.kommunerData.map(kommune => {
         const cheapestForsikring = getCheapestForsikring(kommune);
@@ -572,8 +594,10 @@ function showAllForsikringKommuner() {
         `;
     }).join('');
 
-    // Reset populated state
+    // Reset populated state since we've changed the content
     kommuneGrid.dataset.populated = 'false';
+    
+    console.log('✅ All kommuner displayed for forsikring');
 }
 
 // Navigate to forsikring kommune page
