@@ -93,7 +93,58 @@
         tableBody.innerHTML = html;
         console.log('✅ Table populated successfully with', forsikringData.length, 'rows');
         
+        // Also populate mobile cards
+        populateMobileCardsEmergency(forsikringData);
+        
         return true;
+    }
+    
+    // Populate mobile cards (emergency version)
+    function populateMobileCardsEmergency(data) {
+        console.log('📱 Populating mobile cards (emergency)...');
+        const mobileCardsContainer = document.getElementById('mobileCards');
+        
+        if (!mobileCardsContainer) {
+            console.log('Mobile cards container not found');
+            return;
+        }
+        
+        const cardsHTML = data.map(item => `
+            <div class="insurance-card">
+                <div class="card-header">
+                    <div>
+                        <h3 class="card-provider">${item.udbyder}</h3>
+                        <p class="card-product">${item.produkt}</p>
+                    </div>
+                    <div class="card-price">${item.pris_mdr}</div>
+                </div>
+                
+                <div class="card-coverage">
+                    <h4>Dækning</h4>
+                    <p>${item.dækning}</p>
+                </div>
+                
+                <div class="card-addons">
+                    <h4>Tilvalg</h4>
+                    <div class="addon-tags">
+                        ${item.tilvalg.map(addon => `<span class="addon-tag">${addon}</span>`).join('')}
+                    </div>
+                </div>
+                
+                <div class="card-campaign">
+                    <span class="campaign-badge">${item.kampagne}</span>
+                </div>
+                
+                <div class="card-action">
+                    <a href="${item.link}" class="btn btn-primary" target="_blank" rel="nofollow">
+                        <i class="fas fa-external-link-alt"></i> Se tilbud
+                    </a>
+                </div>
+            </div>
+        `).join('');
+        
+        mobileCardsContainer.innerHTML = cardsHTML;
+        console.log('✅ Mobile cards populated successfully (emergency) with', data.length, 'cards');
     }
     
     // Try multiple times with different approaches
