@@ -106,80 +106,17 @@ function initializeKommuneGrid() {
         return;
     }
 
-    // Show first 24 kommuner initially
-    const initialKommuner = kommunerData.slice(0, 24);
-    
-    kommuneGrid.innerHTML = initialKommuner.map(kommune => `
+    // Show ALL kommuner from the start (no buttons needed)
+    kommuneGrid.innerHTML = kommunerData.map(kommune => `
         <div class="kommune-card" onclick="navigateToForsikringKommune('${kommune}')">
             <h4>${kommune}</h4>
             <p>Se priser i ${kommune}</p>
         </div>
     `).join('');
-
-    // Add "Show more" button if there are more kommuner
-    if (kommunerData.length > 24) {
-        // Check if ANY show more button already exists to prevent duplicates
-        const existingButton = kommuneGrid.parentNode.querySelector('button[onclick*="showAll"]');
-        if (!existingButton) {
-            const showMoreContainer = document.createElement('div');
-            showMoreContainer.style.textAlign = 'center';
-            showMoreContainer.style.marginTop = '2rem';
-            
-            const showMoreBtn = document.createElement('button');
-            showMoreBtn.className = 'btn btn-secondary';
-            showMoreBtn.textContent = `Vis alle ${kommunerData.length} kommuner`;
-            showMoreBtn.onclick = showAllKommuner;
-            
-            showMoreContainer.appendChild(showMoreBtn);
-            kommuneGrid.parentNode.appendChild(showMoreContainer);
-        }
-    }
     
-    console.log('✅ Kommune grid initialized with', initialKommuner.length, 'kommuner');
+    console.log('✅ Kommune grid initialized with', kommunerData.length, 'kommuner');
 }
 
-// Show all kommuner
-function showAllKommuner() {
-    console.log('📋 Showing all kommuner...');
-    const kommuneGrid = document.getElementById('kommuneGrid');
-    if (!kommuneGrid) return;
-
-    // Check if already showing all (toggle behavior)
-    const isShowingAll = kommuneGrid.dataset.showingAll === 'true';
-    
-    if (isShowingAll) {
-        // Show only first 24 kommuner
-        const initialKommuner = kommunerData.slice(0, 24);
-        kommuneGrid.innerHTML = initialKommuner.map(kommune => `
-            <div class="kommune-card" onclick="navigateToForsikringKommune('${kommune}')">
-                <h4>${kommune}</h4>
-                <p>Se priser i ${kommune}</p>
-            </div>
-        `).join('');
-        
-        kommuneGrid.dataset.showingAll = 'false';
-        console.log('📋 Showing first 24 kommuner');
-    } else {
-        // Show all kommuner
-        kommuneGrid.innerHTML = kommunerData.map(kommune => `
-            <div class="kommune-card" onclick="navigateToForsikringKommune('${kommune}')">
-                <h4>${kommune}</h4>
-                <p>Se priser i ${kommune}</p>
-            </div>
-        `).join('');
-        
-        kommuneGrid.dataset.showingAll = 'true';
-        console.log('✅ All kommuner displayed');
-    }
-    
-    // Update button text
-    const button = kommuneGrid.parentNode.querySelector('button[onclick="showAllKommuner()"]');
-    if (button) {
-        button.textContent = kommuneGrid.dataset.showingAll === 'true' 
-            ? `Vis færre kommuner` 
-            : `Vis alle ${kommunerData.length} kommuner`;
-    }
-}
 
 // Navigate to forsikring kommune page
 function navigateToForsikringKommune(kommune) {
@@ -258,4 +195,3 @@ function getCheapestPriceForKommune(kommune) {
 // Export functions for global access
 window.selectKommune = selectKommune;
 window.navigateToForsikringKommune = navigateToForsikringKommune;
-window.showAllKommuner = showAllKommuner;
