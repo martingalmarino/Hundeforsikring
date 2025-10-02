@@ -24,7 +24,7 @@ const kommuneTemplate = `<!DOCTYPE html>
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://hundeforsikring.dk/forsikring/{KOMMUNE_SLUG}/">
     
-    <link rel="stylesheet" href="../../css/style.css?v=20250102">
+                <link rel="stylesheet" href="../../css/style.css?v=${Date.now()}">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
@@ -225,8 +225,8 @@ const kommuneTemplate = `<!DOCTYPE html>
         </div>
     </footer>
 
-    <script src="../../js/main.js?v=20250102"></script>
-    <script src="../../js/kommune-forsikring.js?v=20250102"></script>
+    <script src="../../js/main.js?v=${Date.now()}"></script>
+    <script src="../../js/kommune-forsikring.js?v=${Date.now()}"></script>
     <script>
         // Set kommune-specific data
         window.currentKommune = '{KOMMUNE}';
