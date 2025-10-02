@@ -68,10 +68,5 @@
         }
       ]
     }
-  ],
-  "functions": {
-    "scripts/generate-kommune-pages.js": {
-      "runtime": "nodejs18.x"
-    }
-  }
+  ]
 }
