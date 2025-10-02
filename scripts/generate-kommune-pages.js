@@ -16,7 +16,7 @@ const kommuneTemplate = `<!DOCTYPE html>
     <title>Hundeforsikring i {KOMMUNE} 2025 | Sammenlign Priser</title>
     <meta name="description" content="Sammenlign hundeforsikring priser i {KOMMUNE}. Find den bedste og billigste hundeforsikring fra alle udbydere i {KOMMUNE} kommune.">
     <meta name="keywords" content="hundeforsikring {KOMMUNE}, hundeansvarsforsikring {KOMMUNE}, sammenlign hundeforsikring {KOMMUNE}">
-    <link rel="canonical" href="https://hundeforsikring.dk/forsikring/{KOMMUNE_SLUG}/">
+    <link rel="canonical" href="https://www.hundeforsikring.net/forsikring/{KOMMUNE_SLUG}/">
     
     <!-- Open Graph -->
     <meta property="og:title" content="Hundeforsikring i {KOMMUNE} 2025 | Sammenlign Priser">
