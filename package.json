@@ -12,6 +12,7 @@
     "validate-data": "node scripts/validate-data.js",
     "monitor-prices": "node scripts/price-monitor.js",
     "fix-links": "node scripts/fix-external-links.js",
+    "update-homepage-links": "node scripts/update-links-to-homepages.js",
     "update-version": "node scripts/update-version.js",
     "update-all": "npm run scrape-data && npm run validate-data && npm run monitor-prices && npm run fix-links",
     "force-refresh": "npm run update-version && echo 'Cache busting completed! Refresh your browser.'"
