@@ -783,7 +783,7 @@ body {
 
 .comparison-table {
     width: 100%;
-    min-width: 800px;
+    min-width: 900px;
     border-collapse: collapse;
     background: white;
     border-radius: 8px;
@@ -801,6 +801,13 @@ body {
     vertical-align: middle;
 }
 
+.comparison-table td:last-child {
+    text-align: center;
+    white-space: nowrap;
+    min-width: 150px;
+    padding: 1rem 0.5rem;
+}
+
 .comparison-table th {
     background: #f8f9fa;
     color: #333;
@@ -812,6 +819,12 @@ body {
     top: 0;
     z-index: 10;
     border-bottom: 2px solid #dee2e6;
+}
+
+.comparison-table th:last-child {
+    text-align: center;
+    min-width: 150px;
+    padding: 1rem 0.5rem;
 }
 
 .comparison-table tbody tr {
@@ -877,7 +890,7 @@ body {
 .btn-sm {
     padding: 0.6rem 1rem;
     font-size: 0.85rem;
-    border-radius: 4px;
+    border-radius: 6px;
     transition: all 0.2s ease;
     font-weight: 600;
     border: none;
@@ -887,8 +900,9 @@ body {
     align-items: center;
     justify-content: center;
     gap: 0.4rem;
-    min-width: 100px;
+    min-width: 120px;
     background: var(--primary-color);
+    white-space: nowrap;
     color: white;
     box-shadow: 0 1px 3px rgba(46, 125, 50, 0.3);
 }
