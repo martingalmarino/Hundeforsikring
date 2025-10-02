@@ -206,12 +206,20 @@ window.addEventListener('load', function() {
     console.log('Window loaded, ensuring table is populated...');
     if (forsikringData && forsikringData.length > 0) {
         populateForsikringTable();
-        populateKommuneGrid();
+        // Only populate kommune grid if not already populated
+        const kommuneGrid = document.getElementById('kommuneGrid');
+        if (kommuneGrid && kommuneGrid.dataset.populated !== 'true') {
+            populateKommuneGrid();
+        }
     } else {
         console.log('No data available, reinitializing...');
         initializeWithHardcodedData();
         populateForsikringTable();
-        populateKommuneGrid();
+        // Only populate kommune grid if not already populated
+        const kommuneGrid = document.getElementById('kommuneGrid');
+        if (kommuneGrid && kommuneGrid.dataset.populated !== 'true') {
+            populateKommuneGrid();
+        }
     }
 });
 
@@ -333,7 +341,11 @@ async function loadKommunerData() {
         const jsonData = await response.json();
         console.log('Kommuner JSON data loaded successfully, updating grid...');
         window.kommunerData = jsonData;
-        populateKommuneGrid();
+        // Only populate if not already populated
+        const kommuneGrid = document.getElementById('kommuneGrid');
+        if (kommuneGrid && kommuneGrid.dataset.populated !== 'true') {
+            populateKommuneGrid();
+        }
     } catch (error) {
         console.log('Could not load kommuner from JSON file, using hardcoded data instead');
         // Hardcoded data is already loaded in initializeWithHardcodedData()
@@ -490,6 +502,18 @@ function populateKommuneGrid() {
         return;
     }
 
+    // Prevent multiple executions
+    if (kommuneGrid.dataset.populated === 'true') {
+        console.log('Kommune grid already populated, skipping...');
+        return;
+    }
+
+    console.log('Populating kommune grid with', window.kommunerData.length, 'kommuner');
+
+    // Remove any existing show more buttons first
+    const existingButtons = kommuneGrid.parentNode.querySelectorAll('.show-more-button-container');
+    existingButtons.forEach(btn => btn.remove());
+
     // Show first 24 kommuner initially
     const initialKommuner = window.kommunerData.slice(0, 24);
     
@@ -506,31 +530,34 @@ function populateKommuneGrid() {
         `;
     }).join('');
 
-    // Add "Show more" button if there are more kommuner and it doesn't exist
+    // Add "Show more" button if there are more kommuner
     if (window.kommunerData.length > 24) {
-        // Check if button already exists
-        const existingButton = kommuneGrid.parentNode.querySelector('.show-more-button-container');
-        if (!existingButton) {
         const showMoreBtn = document.createElement('button');
         showMoreBtn.className = 'btn btn-secondary';
-            showMoreBtn.textContent = 'Vis alle 98 kommuner';
+        showMoreBtn.textContent = 'Vis alle 98 kommuner';
         showMoreBtn.onclick = showAllForsikringKommuner;
         
         const showMoreContainer = document.createElement('div');
-            showMoreContainer.className = 'show-more-button-container';
+        showMoreContainer.className = 'show-more-button-container';
         showMoreContainer.style.textAlign = 'center';
         showMoreContainer.style.marginTop = '2rem';
         showMoreContainer.appendChild(showMoreBtn);
         
         kommuneGrid.parentNode.appendChild(showMoreContainer);
-        }
     }
+
+    // Mark as populated
+    kommuneGrid.dataset.populated = 'true';
 }
 
 // Show all kommuner for forsikring
 function showAllForsikringKommuner() {
     const kommuneGrid = document.getElementById('kommuneGrid');
     if (!kommuneGrid || !window.kommunerData) return;
+
+    // Remove all existing show more buttons
+    const existingButtons = kommuneGrid.parentNode.querySelectorAll('.show-more-button-container');
+    existingButtons.forEach(btn => btn.remove());
 
     kommuneGrid.innerHTML = window.kommunerData.map(kommune => {
         const cheapestForsikring = getCheapestForsikring(kommune);
@@ -545,11 +572,8 @@ function showAllForsikringKommuner() {
         `;
     }).join('');
 
-    // Remove the "Show more" button
-    const showMoreContainer = kommuneGrid.parentNode.querySelector('.show-more-button-container');
-    if (showMoreContainer) {
-        showMoreContainer.remove();
-    }
+    // Reset populated state
+    kommuneGrid.dataset.populated = 'false';
 }
 
 // Navigate to forsikring kommune page
