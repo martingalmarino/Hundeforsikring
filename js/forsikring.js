@@ -532,8 +532,8 @@ function populateKommuneGrid() {
 
     // Add "Show more" button if there are more kommuner
     if (window.kommunerData.length > 24) {
-        // Check if button already exists to prevent duplicates
-        const existingButton = kommuneGrid.parentNode.querySelector('button[onclick="showAllForsikringKommuner()"]');
+        // Check if ANY show more button already exists to prevent duplicates
+        const existingButton = kommuneGrid.parentNode.querySelector('button[onclick*="showAll"]');
         if (!existingButton) {
             const showMoreBtn = document.createElement('button');
             showMoreBtn.className = 'btn btn-secondary';
@@ -556,28 +556,57 @@ function populateKommuneGrid() {
 
 // Show all kommuner for forsikring
 function showAllForsikringKommuner() {
+    console.log('📋 Showing all kommuner for forsikring...');
     const kommuneGrid = document.getElementById('kommuneGrid');
     if (!kommuneGrid || !window.kommunerData) return;
 
-    // Remove all existing show more buttons
-    const existingButtons = kommuneGrid.parentNode.querySelectorAll('.show-more-button-container');
-    existingButtons.forEach(btn => btn.remove());
-
-    kommuneGrid.innerHTML = window.kommunerData.map(kommune => {
-        const cheapestForsikring = getCheapestForsikring(kommune);
-        const priceText = cheapestForsikring ? `Fra ${cheapestForsikring.pris_mdr}` : 'Se priser';
+    // Check if already showing all (toggle behavior)
+    const isShowingAll = kommuneGrid.dataset.showingAll === 'true';
+    
+    if (isShowingAll) {
+        // Show only first 24 kommuner
+        const initialKommuner = window.kommunerData.slice(0, 24);
+        kommuneGrid.innerHTML = initialKommuner.map(kommune => {
+            const cheapestForsikring = getCheapestForsikring(kommune);
+            const priceText = cheapestForsikring ? `Fra ${cheapestForsikring.pris_mdr}` : 'Se priser';
+            
+            return `
+                <div class="kommune-card" onclick="navigateToForsikringKommune('${kommune}')">
+                    <h4>${kommune}</h4>
+                    <p>${priceText}</p>
+                    <small>Hundeforsikring i ${kommune}</small>
+                </div>
+            `;
+        }).join('');
         
-        return `
-            <div class="kommune-card" onclick="navigateToForsikringKommune('${kommune}')">
-                <h4>${kommune}</h4>
-                <p>${priceText}</p>
-                <small>Hundeforsikring i ${kommune}</small>
-            </div>
-        `;
-    }).join('');
-
-    // Reset populated state
-    kommuneGrid.dataset.populated = 'false';
+        kommuneGrid.dataset.showingAll = 'false';
+        console.log('📋 Showing first 24 kommuner for forsikring');
+    } else {
+        // Show all kommuner
+        kommuneGrid.innerHTML = window.kommunerData.map(kommune => {
+            const cheapestForsikring = getCheapestForsikring(kommune);
+            const priceText = cheapestForsikring ? `Fra ${cheapestForsikring.pris_mdr}` : 'Se priser';
+            
+            return `
+                <div class="kommune-card" onclick="navigateToForsikringKommune('${kommune}')">
+                    <h4>${kommune}</h4>
+                    <p>${priceText}</p>
+                    <small>Hundeforsikring i ${kommune}</small>
+                </div>
+            `;
+        }).join('');
+        
+        kommuneGrid.dataset.showingAll = 'true';
+        console.log('✅ All kommuner displayed for forsikring');
+    }
+    
+    // Update button text
+    const button = kommuneGrid.parentNode.querySelector('button[onclick="showAllForsikringKommuner()"]');
+    if (button) {
+        button.textContent = kommuneGrid.dataset.showingAll === 'true' 
+            ? `Vis færre kommuner` 
+            : `Vis alle 98 kommuner`;
+    }
 }
 
 // Navigate to forsikring kommune page

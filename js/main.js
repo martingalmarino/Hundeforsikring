@@ -118,8 +118,8 @@ function initializeKommuneGrid() {
 
     // Add "Show more" button if there are more kommuner
     if (kommunerData.length > 24) {
-        // Check if button already exists to prevent duplicates
-        const existingButton = kommuneGrid.parentNode.querySelector('button[onclick="showAllKommuner()"]');
+        // Check if ANY show more button already exists to prevent duplicates
+        const existingButton = kommuneGrid.parentNode.querySelector('button[onclick*="showAll"]');
         if (!existingButton) {
             const showMoreContainer = document.createElement('div');
             showMoreContainer.style.textAlign = 'center';
@@ -144,20 +144,41 @@ function showAllKommuner() {
     const kommuneGrid = document.getElementById('kommuneGrid');
     if (!kommuneGrid) return;
 
-    kommuneGrid.innerHTML = kommunerData.map(kommune => `
-        <div class="kommune-card" onclick="navigateToForsikringKommune('${kommune}')">
-            <h4>${kommune}</h4>
-            <p>Se priser i ${kommune}</p>
-        </div>
-    `).join('');
-
-    // Remove the "Show more" button
-    const showMoreContainer = kommuneGrid.parentNode.querySelector('div[style*="text-align: center"]');
-    if (showMoreContainer) {
-        showMoreContainer.remove();
+    // Check if already showing all (toggle behavior)
+    const isShowingAll = kommuneGrid.dataset.showingAll === 'true';
+    
+    if (isShowingAll) {
+        // Show only first 24 kommuner
+        const initialKommuner = kommunerData.slice(0, 24);
+        kommuneGrid.innerHTML = initialKommuner.map(kommune => `
+            <div class="kommune-card" onclick="navigateToForsikringKommune('${kommune}')">
+                <h4>${kommune}</h4>
+                <p>Se priser i ${kommune}</p>
+            </div>
+        `).join('');
+        
+        kommuneGrid.dataset.showingAll = 'false';
+        console.log('📋 Showing first 24 kommuner');
+    } else {
+        // Show all kommuner
+        kommuneGrid.innerHTML = kommunerData.map(kommune => `
+            <div class="kommune-card" onclick="navigateToForsikringKommune('${kommune}')">
+                <h4>${kommune}</h4>
+                <p>Se priser i ${kommune}</p>
+            </div>
+        `).join('');
+        
+        kommuneGrid.dataset.showingAll = 'true';
+        console.log('✅ All kommuner displayed');
     }
     
-    console.log('✅ All kommuner displayed');
+    // Update button text
+    const button = kommuneGrid.parentNode.querySelector('button[onclick="showAllKommuner()"]');
+    if (button) {
+        button.textContent = kommuneGrid.dataset.showingAll === 'true' 
+            ? `Vis færre kommuner` 
+            : `Vis alle ${kommunerData.length} kommuner`;
+    }
 }
 
 // Navigate to forsikring kommune page
