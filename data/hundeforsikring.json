@@ -1,0 +1,56 @@
+[
+  {
+    "udbyder": "Agria",
+    "produkt": "Agria Ansvar",
+    "pris_mdr": "79 kr./md",
+    "dækning": "Lovpligtig hundeansvarsforsikring",
+    "tilvalg": ["Sygeforsikring", "Tanddækning", "Medicindækning"],
+    "kampagne": "10% rabat ved online bestilling",
+    "link": "https://www.agria.dk/hundeforsikring/"
+  },
+  {
+    "udbyder": "Tryg",
+    "produkt": "Tryg Hundeforsikring",
+    "pris_mdr": "85 kr./md",
+    "dækning": "Ansvarsforsikring med mulighed for udvidelse",
+    "tilvalg": ["Udvidet ansvar", "Sygeforsikring"],
+    "kampagne": "Første måned gratis",
+    "link": "https://www.tryg.dk/forsikring/hund"
+  },
+  {
+    "udbyder": "Dyrekassen Danmark",
+    "produkt": "Dyrekassen Hund Basis",
+    "pris_mdr": "95 kr./md",
+    "dækning": "Ansvar + mulighed for sygdom og tandskader",
+    "tilvalg": ["Sygeforsikring", "Operationer", "Udvidet tanddækning"],
+    "kampagne": "Gratis rådgivning inkluderet",
+    "link": "https://www.dyrekassen.dk/hund/"
+  },
+  {
+    "udbyder": "Alka Forsikring",
+    "produkt": "Alka Hund Ansvar",
+    "pris_mdr": "75 kr./md",
+    "dækning": "Basis hundeansvarsforsikring",
+    "tilvalg": ["Sygeforsikring", "Livsforsikring"],
+    "kampagne": "Ingen selvrisiko ved første skade",
+    "link": "https://www.alka.dk/forsikringer/hund"
+  },
+  {
+    "udbyder": "GF Forsikring",
+    "produkt": "GF Hundeforsikring",
+    "pris_mdr": "89 kr./md",
+    "dækning": "Obligatorisk ansvarsforsikring + valgfri udvidelser",
+    "tilvalg": ["Sygeforsikring", "Udvidet ansvar", "Medicindækning"],
+    "kampagne": "Rabat ved flere kæledyr",
+    "link": "https://www.gf.dk/hund"
+  },
+  {
+    "udbyder": "Topdanmark",
+    "produkt": "Topdanmark Hundeforsikring",
+    "pris_mdr": "99 kr./md",
+    "dækning": "Hundansvar med mulighed for sygdom og tandbehandling",
+    "tilvalg": ["Sygeforsikring", "Livsforsikring", "Tandbehandling"],
+    "kampagne": "Samlingsrabat ved husstandsforsikringer",
+    "link": "https://www.topdanmark.dk/hund"
+  }
+]

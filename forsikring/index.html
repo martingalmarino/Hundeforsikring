@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hundeforsikring i Danmark 2025 | Sammenlign alle selskaber</title>
+    <meta name="description" content="Sammenlign hundeforsikring fra alle selskaber i Danmark. Find den bedste og billigste hundeforsikring med obligatorisk ansvarsforsikring.">
+    <meta name="keywords" content="hundeforsikring, hundeansvarsforsikring, sammenlign hundeforsikring, billig hundeforsikring, obligatorisk hundeforsikring">
+    <link rel="canonical" href="https://hundeforsikring.dk/forsikring/">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Hundeforsikring i Danmark 2025 | Sammenlign alle selskaber">
+    <meta property="og:description" content="Sammenlign hundeforsikring fra alle selskaber i Danmark. Find den bedste og billigste hundeforsikring.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://hundeforsikring.dk/forsikring/">
+    
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- JSON-LD Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Hundeforsikring i Danmark 2025",
+      "description": "Sammenlign hundeforsikring fra alle selskaber i Danmark",
+      "url": "https://hundeforsikring.dk/forsikring/",
+      "mainEntity": {
+        "@type": "ItemList",
+        "name": "Hundeforsikringsselskaber",
+        "description": "Sammenligning af hundeforsikringsselskaber i Danmark"
+      }
+    }
+    </script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <a href="../">
+                        <i class="fas fa-paw"></i>
+                        <span>Hundeforsikring.dk</span>
+                    </a>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="../forsikring/" class="nav-link active">Sammenlign</a></li>
+                    <li><a href="../guide/" class="nav-link">Guide</a></li>
+                    <li><a href="../faq/" class="nav-link">FAQ</a></li>
+                </ul>
+                <div class="nav-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    Sammenlign <span class="highlight">hundeforsikring</span> i hele Danmark
+                </h1>
+                <p class="hero-subtitle">
+                    Hundeansvarsforsikring er lovpligtig i Danmark. Find den bedste og billigste løsning for dig og din hund.
+                </p>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-number">15+</span>
+                        <span class="stat-label">Forsikringsselskaber</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">Fra 79 kr</span>
+                        <span class="stat-label">Pr. måned</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">100%</span>
+                        <span class="stat-label">Gratis sammenligning</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <!-- Quick Info -->
+            <section class="info-section">
+                <div class="info-cards">
+                    <div class="info-card">
+                        <div class="info-icon">
+                            <i class="fas fa-gavel"></i>
+                        </div>
+                        <h3>Lovpligtig forsikring</h3>
+                        <p>Alle hunde i Danmark skal have hundeansvarsforsikring. Uden forsikring kan du få bøder op til 10.000 kr.</p>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3>Minimum 3 mio. dækning</h3>
+                        <p>Hundeansvarsforsikring skal dække mindst 3.000.000 kr. i skadeserstatning.</p>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <h3>Gælder hele livet</h3>
+                        <p>Forsikringen skal være aktiv så længe du ejer hunden, uanset alder eller sundhedstilstand.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Comparison Table -->
+            <section class="comparison-section">
+                <div class="section-header">
+                    <h2 class="section-title">Sammenlign hundeforsikringsselskaber</h2>
+                    <p class="section-subtitle">Alle priser er fra 2025 og kan variere afhængigt af hundens race, alder og din kommune.</p>
+                </div>
+                
+                <div class="table-container">
+                    <table class="comparison-table" id="forsikringTable">
+                        <thead>
+                            <tr>
+                                <th>Udbyder</th>
+                                <th>Produkt</th>
+                                <th>Pris/måned</th>
+                                <th>Dækning</th>
+                                <th>Tilvalg</th>
+                                <th>Kampagne</th>
+                                <th>Handling</th>
+                            </tr>
+                        </thead>
+                        <tbody id="forsikringTableBody">
+                            <!-- Populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Kommune Selection -->
+            <section class="kommune-section">
+                <div class="section-header">
+                    <h2 class="section-title">Find priser i din kommune</h2>
+                    <p class="section-subtitle">Priserne kan variere mellem kommuner. Vælg din kommune for at se lokale priser.</p>
+                </div>
+                
+                <div class="kommune-grid" id="kommuneGrid">
+                    <!-- Populated by JavaScript -->
+                </div>
+            </section>
+
+            <!-- SEO Content -->
+            <section class="seo-content">
+                <h2>Hvad er hundeansvarsforsikring?</h2>
+                <p>Hundeansvarsforsikring er en lovpligtig forsikring, der dækker skader, som din hund forvolder på andre personer, dyr eller ejendom. I Danmark er det påkrævet, at alle hunde har en sådan forsikring, og den skal dække mindst 3.000.000 kr. i skadeserstatning.</p>
+
+                <h3>Hvad dækker hundeansvarsforsikring?</h3>
+                <ul>
+                    <li><strong>Skader på personer:</strong> Hvis din hund bider eller på anden måde skader en person</li>
+                    <li><strong>Skader på dyr:</strong> Hvis din hund skader andre dyr, fx katte eller andre hunde</li>
+                    <li><strong>Skader på ejendom:</strong> Hvis din hund beskadiger andres ejendom, fx biler eller haveanlæg</li>
+                    <li><strong>Juridisk hjælp:</strong> Retshjælp og processomkostninger i forbindelse med skadesanmeldelser</li>
+                </ul>
+
+                <h3>Hvad koster hundeforsikring?</h3>
+                <p>Prisen på hundeforsikring varierer afhængigt af flere faktorer:</p>
+                <ul>
+                    <li><strong>Hundens race:</strong> Nogle racer anses for mere risikable end andre</li>
+                    <li><strong>Hundens alder:</strong> Ældre hunde kan have højere præmier</li>
+                    <li><strong>Din kommune:</strong> Priserne kan variere mellem kommuner</li>
+                    <li><strong>Dækningsomfang:</strong> Grundforsikring vs. udvidede pakker</li>
+                </ul>
+
+                <h3>Hvordan vælger jeg den rigtige hundeforsikring?</h3>
+                <p>Når du skal vælge hundeforsikring, skal du overveje:</p>
+                <ul>
+                    <li><strong>Dækningsomfang:</strong> Sørg for at dækningen er tilstrækkelig (minimum 3 mio. kr.)</li>
+                    <li><strong>Pris:</strong> Sammenlign priser fra forskellige selskaber</li>
+                    <li><strong>Kundeservice:</strong> Vælg et selskab med god kundeservice</li>
+                    <li><strong>Tilvalg:</strong> Overvej om du har brug for sygeforsikring eller andre tilvalg</li>
+                </ul>
+
+                <h3>Ofte stillede spørgsmål om hundeforsikring</h3>
+                
+                <div class="faq-item">
+                    <h4>Er hundeforsikring virkelig lovpligtig?</h4>
+                    <p>Ja, hundeansvarsforsikring er lovpligtig i hele Danmark. Uden forsikring kan du få bøder, og kommunen kan kræve, at hunden fjernes.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h4>Hvad hvis jeg ikke kan betale forsikringen?</h4>
+                    <p>Hvis du ikke kan betale forsikringen, skal du kontakte kommunen. De kan hjælpe med at finde en løsning eller hjælpe med at finde hunden et nyt hjem.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h4>Kan jeg skifte forsikringsselskab?</h4>
+                    <p>Ja, du kan altid skifte forsikringsselskab. Sørg for at have den nye forsikring aktiv, før du opsiger den gamle.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h4>Hvad hvis min hund aldrig har lavet skade?</h4>
+                    <p>Selv om din hund aldrig har lavet skade, er forsikringen stadig lovpligtig. Det er ikke muligt at få dispensation fra kravet.</p>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Hundeforsikring.dk</h3>
+                    <p>Danmarks førende sammenligning af hundeforsikring og tandrensning priser.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Hundeforsikring</h4>
+                    <ul>
+                        <li><a href="../forsikring/">Sammenlign forsikring</a></li>
+                        <li><a href="../guide/">Guide til forsikring</a></li>
+                        <li><a href="../faq/">Ofte stillede spørgsmål</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Kommuner</h4>
+                    <ul>
+                        <li><a href="../forsikring/københavn/">København</a></li>
+                        <li><a href="../forsikring/aarhus/">Aarhus</a></li>
+                        <li><a href="../forsikring/odense/">Odense</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Om os</h4>
+                    <ul>
+                        <li><a href="../om-os/">Om Hundeforsikring.dk</a></li>
+                        <li><a href="../kontakt/">Kontakt os</a></li>
+                        <li><a href="../privatlivspolitik/">Privatlivspolitik</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Hundeforsikring.dk. Alle rettigheder forbeholdes.</p>
+                <p>Hundeforsikring.dk er et uafhængigt sammenligningssite for hundeejere i Danmark.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/forsikring.js"></script>
+</body>
+</html>
+

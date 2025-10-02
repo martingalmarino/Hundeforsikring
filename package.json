@@ -1,0 +1,26 @@
+{
+  "name": "hundeforsikring",
+  "version": "1.0.0",
+  "description": "Sammenlign hundeforsikring priser i hele Danmark",
+  "main": "index.html",
+  "scripts": {
+    "dev": "vercel dev",
+    "build": "echo 'Static site - no build needed'",
+    "start": "vercel dev"
+  },
+  "keywords": [
+    "hundeforsikring",
+    "hundeansvarsforsikring",
+    "danmark",
+    "sammenlign",
+    "forsikring"
+  ],
+  "author": "Martin Galmarino",
+  "license": "MIT",
+  "devDependencies": {
+    "vercel": "^32.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
