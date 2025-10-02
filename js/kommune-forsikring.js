@@ -122,7 +122,7 @@ function initializeWithHardcodedData() {
 async function loadForsikringData() {
     try {
         console.log('📡 Loading forsikring data from JSON...');
-        const response = await fetch('./data/hundeforsikring.json');
+        const response = await fetch('/data/hundeforsikring.json');
         if (response.ok) {
             const data = await response.json();
             forsikringData = data;
@@ -153,7 +153,7 @@ function populateKommuneForsikringTable() {
         tableBody.innerHTML = '<tr><td colspan="7" style="text-align: center; padding: 2rem; color: #666;">Ingen data tilgængelig</td></tr>';
         return;
     }
-    
+
     // Sort data by price (cheapest first)
     const sortedData = [...forsikringData].sort((a, b) => {
         const priceA = parseInt(a.pris_mdr.replace(/[^\d]/g, ''));
@@ -174,15 +174,15 @@ function populateKommuneForsikringTable() {
         }
         
         return `
-            <tr>
-                <td><strong>${item.udbyder}</strong></td>
-                <td>${item.produkt}</td>
+                        <tr>
+                            <td><strong>${item.udbyder}</strong></td>
+                            <td>${item.produkt}</td>
                 <td><span class="price">${item.pris_mdr}</span></td>
-                <td>${item.dækning}</td>
-                <td>${item.tilvalg.join(', ')}</td>
-                <td><span class="campaign">${item.kampagne}</span></td>
+                            <td>${item.dækning}</td>
+                            <td>${item.tilvalg.join(', ')}</td>
+                            <td><span class="campaign">${item.kampagne}</span></td>
                 <td><a href="${item.link}" class="${buttonClass}" target="_blank" rel="nofollow"><i class="fas fa-external-link-alt"></i> Se tilbud</a></td>
-            </tr>
+                        </tr>
         `;
     }).join('');
     
@@ -205,7 +205,7 @@ function populateMobileCards(data) {
         console.log('⚠️ Mobile cards container not found');
         return;
     }
-    
+
     const cardsHTML = data.map((item, index) => {
         // Assign button classes based on price tier
         let buttonClass = 'btn btn-primary standard';

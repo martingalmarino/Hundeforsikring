@@ -301,7 +301,7 @@ function initializeWithHardcodedData() {
 async function loadForsikringData() {
     try {
         console.log('Attempting to load forsikring data from JSON...');
-        const response = await fetch('../data/hundeforsikring.json');
+        const response = await fetch('/data/hundeforsikring.json');
         
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
@@ -321,7 +321,7 @@ async function loadForsikringData() {
 async function loadKommunerData() {
     try {
         console.log('Attempting to load kommuner data from JSON...');
-        const response = await fetch('../data/kommuner.json');
+        const response = await fetch('/data/kommuner.json');
         
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
@@ -409,15 +409,15 @@ function populateForsikringTable() {
         }
         
         return `
-            <tr>
-                <td><strong>${item.udbyder}</strong></td>
-                <td>${item.produkt}</td>
+        <tr>
+            <td><strong>${item.udbyder}</strong></td>
+            <td>${item.produkt}</td>
                 <td><span class="price">${item.pris_mdr}</span></td>
-                <td>${item.dækning}</td>
+            <td>${item.dækning}</td>
                 <td class="tilvalg">${item.tilvalg.join(', ')}</td>
-                <td><span class="campaign">${item.kampagne}</span></td>
+            <td><span class="campaign">${item.kampagne}</span></td>
                 <td><a href="${item.link}" class="${buttonClass}" target="_blank" rel="nofollow"><i class="fas fa-external-link-alt"></i> Se tilbud</a></td>
-            </tr>
+        </tr>
         `;
     }).join('');
     

@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
 async function loadKommuneData() {
     try {
         console.log('📡 Loading kommune data...');
-        const kommunerResponse = await fetch('./data/kommuner.json');
+        const kommunerResponse = await fetch('/data/kommuner.json');
         kommunerData = await kommunerResponse.json();
         
         console.log('✅ Kommune data loaded:', kommunerData.length, 'kommuner');
