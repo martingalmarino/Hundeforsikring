@@ -10,9 +10,11 @@
       "Medicindækning"
     ],
     "kampagne": "10% rabat ved online bestilling",
-    "link": "https://www.agria.dk/hundeforsikring/",
+    "link": "https://www.agria.dk/hund/",
     "last_updated": "2025-10-02T00:51:23.463Z",
-    "source": "mock_data"
+    "source": "mock_data",
+    "link_fixed": "2025-10-02T02:29:14.376Z",
+    "original_link": "https://www.agria.dk/hundeforsikring/"
   },
   {
     "udbyder": "Tryg",
@@ -40,7 +42,10 @@
     "kampagne": "Ingen selvrisiko ved første skade",
     "link": "https://www.alka.dk/forsikringer/hund",
     "last_updated": "2025-10-02T00:51:27.467Z",
-    "source": "mock_data"
+    "source": "mock_data",
+    "link_broken": true,
+    "link_check_date": "2025-10-02T02:29:22.028Z",
+    "link_error": "HTTP 403"
   },
   {
     "udbyder": "GF Forsikring",
@@ -53,9 +58,11 @@
       "Medicindækning"
     ],
     "kampagne": "Rabat ved flere kæledyr",
-    "link": "https://www.gf.dk/hund",
+    "link": "https://www.gf.dk/",
     "last_updated": "2025-10-02T00:51:29.471Z",
-    "source": "mock_data"
+    "source": "mock_data",
+    "link_fixed": "2025-10-02T02:29:28.257Z",
+    "original_link": "https://www.gf.dk/hund"
   },
   {
     "udbyder": "Dyrekassen Danmark",
@@ -97,9 +104,11 @@
       "Tanddækning"
     ],
     "kampagne": "Ny kunde rabat",
-    "link": "https://www.codan.dk/forsikring/hundeforsikring",
+    "link": "https://www.codan.dk/hund/",
     "last_updated": "2025-10-02T00:51:35.477Z",
-    "source": "mock_data"
+    "source": "mock_data",
+    "link_fixed": "2025-10-02T02:29:40.626Z",
+    "original_link": "https://www.codan.dk/forsikring/hundeforsikring"
   },
   {
     "udbyder": "Gjensidige",
@@ -111,8 +120,10 @@
       "Udvidet ansvar"
     ],
     "kampagne": "Online bestilling rabat",
-    "link": "https://www.gjensidige.dk/forsikring/hundeforsikring",
+    "link": "https://www.gjensidige.dk/",
     "last_updated": "2025-10-02T00:51:37.480Z",
-    "source": "mock_data"
+    "source": "mock_data",
+    "link_fixed": "2025-10-02T02:29:47.755Z",
+    "original_link": "https://www.gjensidige.dk/forsikring/hundeforsikring"
   }
 ]

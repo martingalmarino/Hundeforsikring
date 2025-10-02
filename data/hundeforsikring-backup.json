@@ -1,118 +1,118 @@
 [
   {
     "udbyder": "Agria",
-    "produkt": "Agria Hundeforsikring",
-    "pris_mdr": "Pris på anmodning",
-    "dækning": "Hundeansvarsforsikring med mulighed for udvidelse",
+    "produkt": "Agria Ansvar",
+    "pris_mdr": "79 kr./md",
+    "dækning": "Lovpligtig hundeansvarsforsikring",
     "tilvalg": [
       "Sygeforsikring",
       "Tanddækning",
       "Medicindækning"
     ],
-    "kampagne": "Første måned gratis",
+    "kampagne": "10% rabat ved online bestilling",
     "link": "https://www.agria.dk/hundeforsikring/",
-    "last_updated": "2025-10-02T00:50:19.159Z",
-    "error": "Identifier is expected"
+    "last_updated": "2025-10-02T00:51:23.463Z",
+    "source": "mock_data"
   },
   {
     "udbyder": "Tryg",
     "produkt": "Tryg Hundeforsikring",
-    "pris_mdr": "Pris på anmodning",
-    "dækning": "Hundeansvarsforsikring med mulighed for udvidelse",
+    "pris_mdr": "85 kr./md",
+    "dækning": "Ansvarsforsikring med mulighed for udvidelse",
     "tilvalg": [
       "Udvidet ansvar",
       "Sygeforsikring"
     ],
-    "kampagne": "Online bestilling rabat",
+    "kampagne": "Første måned gratis",
     "link": "https://www.tryg.dk/forsikring/hund",
-    "last_updated": "2025-10-02T00:50:23.041Z",
-    "error": "Identifier is expected"
+    "last_updated": "2025-10-02T00:51:25.465Z",
+    "source": "mock_data"
   },
   {
     "udbyder": "Alka Forsikring",
-    "produkt": "Alka Forsikring Hundeforsikring",
-    "pris_mdr": "Pris på anmodning",
-    "dækning": "Hundeansvarsforsikring med mulighed for udvidelse",
+    "produkt": "Alka Hund Ansvar",
+    "pris_mdr": "75 kr./md",
+    "dækning": "Basis hundeansvarsforsikring",
     "tilvalg": [
       "Sygeforsikring",
       "Livsforsikring"
     ],
-    "kampagne": "Samlingsrabat ved husstandsforsikringer",
+    "kampagne": "Ingen selvrisiko ved første skade",
     "link": "https://www.alka.dk/forsikringer/hund",
-    "last_updated": "2025-10-02T00:50:26.121Z",
-    "error": "Identifier is expected"
+    "last_updated": "2025-10-02T00:51:27.467Z",
+    "source": "mock_data"
   },
   {
     "udbyder": "GF Forsikring",
-    "produkt": "GF Forsikring Hundeforsikring",
-    "pris_mdr": "Pris på anmodning",
-    "dækning": "Hundeansvarsforsikring med mulighed for udvidelse",
+    "produkt": "GF Hundeforsikring",
+    "pris_mdr": "89 kr./md",
+    "dækning": "Obligatorisk ansvarsforsikring + valgfri udvidelser",
     "tilvalg": [
       "Sygeforsikring",
       "Udvidet ansvar",
       "Medicindækning"
     ],
-    "kampagne": "Online bestilling rabat",
+    "kampagne": "Rabat ved flere kæledyr",
     "link": "https://www.gf.dk/hund",
-    "last_updated": "2025-10-02T00:50:30.067Z",
-    "error": "Identifier is expected"
+    "last_updated": "2025-10-02T00:51:29.471Z",
+    "source": "mock_data"
   },
   {
     "udbyder": "Dyrekassen Danmark",
-    "produkt": "Dyrekassen Danmark Hundeforsikring",
-    "pris_mdr": "Pris på anmodning",
-    "dækning": "Hundeansvarsforsikring med mulighed for udvidelse",
+    "produkt": "Dyrekassen Hund Basis",
+    "pris_mdr": "95 kr./md",
+    "dækning": "Ansvar + mulighed for sygdom og tandskader",
     "tilvalg": [
       "Sygeforsikring",
       "Operationer",
       "Udvidet tanddækning"
     ],
-    "kampagne": "Ingen selvrisiko ved første skade",
+    "kampagne": "Gratis rådgivning inkluderet",
     "link": "https://www.dyrekassen.dk/hund/",
-    "last_updated": "2025-10-02T00:50:33.848Z",
-    "error": "Identifier is expected"
+    "last_updated": "2025-10-02T00:51:31.473Z",
+    "source": "mock_data"
   },
   {
     "udbyder": "Topdanmark",
     "produkt": "Topdanmark Hundeforsikring",
-    "pris_mdr": "Pris på anmodning",
-    "dækning": "Hundeansvarsforsikring med mulighed for udvidelse",
+    "pris_mdr": "99 kr./md",
+    "dækning": "Hundansvar med mulighed for sygdom og tandbehandling",
     "tilvalg": [
       "Sygeforsikring",
       "Livsforsikring",
       "Tandbehandling"
     ],
-    "kampagne": "Online bestilling rabat",
+    "kampagne": "Samlingsrabat ved husstandsforsikringer",
     "link": "https://www.topdanmark.dk/hund",
-    "last_updated": "2025-10-02T00:50:37.561Z",
-    "error": "Identifier is expected"
+    "last_updated": "2025-10-02T00:51:33.475Z",
+    "source": "mock_data"
   },
   {
     "udbyder": "Codan",
     "produkt": "Codan Hundeforsikring",
-    "pris_mdr": "Pris på anmodning",
-    "dækning": "Hundeansvarsforsikring med mulighed for udvidelse",
+    "pris_mdr": "82 kr./md",
+    "dækning": "Hundeansvarsforsikring med udvidelser",
     "tilvalg": [
       "Sygeforsikring",
       "Tanddækning"
     ],
     "kampagne": "Ny kunde rabat",
     "link": "https://www.codan.dk/forsikring/hundeforsikring",
-    "last_updated": "2025-10-02T00:50:41.145Z",
-    "error": "Identifier is expected"
+    "last_updated": "2025-10-02T00:51:35.477Z",
+    "source": "mock_data"
   },
   {
     "udbyder": "Gjensidige",
     "produkt": "Gjensidige Hundeforsikring",
-    "pris_mdr": "Pris på anmodning",
-    "dækning": "Hundeansvarsforsikring med mulighed for udvidelse",
+    "pris_mdr": "88 kr./md",
+    "dækning": "Ansvar med mulighed for sygdom",
     "tilvalg": [
       "Sygeforsikring",
       "Udvidet ansvar"
     ],
-    "kampagne": "Første måned gratis",
+    "kampagne": "Online bestilling rabat",
     "link": "https://www.gjensidige.dk/forsikring/hundeforsikring",
-    "last_updated": "2025-10-02T00:50:44.972Z",
-    "error": "Identifier is expected"
+    "last_updated": "2025-10-02T00:51:37.480Z",
+    "source": "mock_data"
   }
 ]
