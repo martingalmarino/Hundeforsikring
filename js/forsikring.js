@@ -10,6 +10,10 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize with hardcoded data immediately
     initializeWithHardcodedData();
     
+    // Populate the table immediately with hardcoded data
+    populateForsikringTable();
+    populateKommuneGrid();
+    
     // Try to load from JSON files (will work if served from web server)
     loadForsikringData();
     loadKommunerData();
