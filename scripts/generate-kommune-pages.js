@@ -63,7 +63,7 @@ const kommuneTemplate = `<!DOCTYPE html>
                     <li><a href="../../guide/" class="nav-link">Guide</a></li>
                     <li><a href="../../faq/" class="nav-link">FAQ</a></li>
                 </ul>
-                <div class="nav-toggle">
+                <div class="nav-toggle" id="navToggle">
                     <span></span>
                     <span></span>
                     <span></span>
@@ -71,6 +71,21 @@ const kommuneTemplate = `<!DOCTYPE html>
             </div>
         </nav>
     </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-content">
+            <div class="mobile-menu-header">
+                <h3>Menu</h3>
+                <button class="mobile-menu-close" id="mobileMenuClose">&times;</button>
+            </div>
+            <ul class="mobile-menu-nav">
+                <li><a href="../../forsikring/">Sammenlign</a></li>
+                <li><a href="../../guide/">Guide</a></li>
+                <li><a href="../../faq/">FAQ</a></li>
+            </ul>
+        </div>
+    </div>
 
     <!-- Breadcrumb -->
     <div class="breadcrumb-container">
@@ -228,8 +243,8 @@ const kommuneTemplate = `<!DOCTYPE html>
         </div>
     </footer>
 
-    <script src="../../js/main.js?v=20250102v3"></script>
-    <script src="../../js/kommune-forsikring.js?v=20250102v3"></script>
+                <script src="../../js/main.js?v=20250102v6"></script>
+                <script src="../../js/kommune-forsikring.js?v=20250102v6"></script>
     <script>
         // Set kommune-specific data
         window.currentKommune = '{KOMMUNE}';

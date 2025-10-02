@@ -176,17 +176,38 @@ function navigateToForsikringKommune(kommune) {
 // Initialize mobile menu
 function initializeMobileMenu() {
     console.log('📱 Initializing mobile menu...');
-    const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+    const navToggle = document.getElementById('navToggle');
     const mobileMenu = document.getElementById('mobileMenu');
+    const mobileMenuClose = document.getElementById('mobileMenuClose');
 
-    if (!mobileMenuToggle || !mobileMenu) {
+    if (!navToggle || !mobileMenu) {
         console.log('⚠️ Mobile menu elements not found');
         return;
     }
 
-    mobileMenuToggle.addEventListener('click', function() {
+    // Toggle menu when clicking hamburger
+    navToggle.addEventListener('click', function() {
         mobileMenu.classList.toggle('active');
         this.classList.toggle('active');
+        document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+    });
+
+    // Close menu when clicking close button
+    if (mobileMenuClose) {
+        mobileMenuClose.addEventListener('click', function() {
+            mobileMenu.classList.remove('active');
+            navToggle.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+    }
+
+    // Close menu when clicking outside
+    mobileMenu.addEventListener('click', function(e) {
+        if (e.target === mobileMenu) {
+            mobileMenu.classList.remove('active');
+            navToggle.classList.remove('active');
+            document.body.style.overflow = '';
+        }
     });
 
     // Close mobile menu when clicking on a link
@@ -194,7 +215,8 @@ function initializeMobileMenu() {
     mobileMenuLinks.forEach(link => {
         link.addEventListener('click', function() {
             mobileMenu.classList.remove('active');
-            mobileMenuToggle.classList.remove('active');
+            navToggle.classList.remove('active');
+            document.body.style.overflow = '';
         });
     });
     
