@@ -1,8 +1,184 @@
 // JavaScript for forsikring page
 
 // Global variables for data
-let forsikringData = [];
-let kommunerData = [];
+let forsikringData =         [
+                {
+                        "udbyder": "Agria",
+                        "produkt": "Agria Ansvar",
+                        "pris_mdr": "79 kr./md",
+                        "dækning": "Lovpligtig hundeansvarsforsikring",
+                        "tilvalg": [
+                                "Sygeforsikring",
+                                "Tanddækning",
+                                "Medicindækning"
+                        ],
+                        "kampagne": "10% rabat ved online bestilling",
+                        "link": "https://www.agria.dk/",
+                        "last_updated": "2025-10-02T00:51:23.463Z",
+                        "source": "mock_data",
+                        "link_fixed": "2025-10-02T02:29:14.376Z",
+                        "original_link": "https://www.agria.dk/hundeforsikring/",
+                        "kommuner": [
+                                "København",
+                                "Odense",
+                                "Aarhus",
+                                "Aalborg"
+                        ]
+                },
+                {
+                        "udbyder": "Tryg",
+                        "produkt": "Tryg Hundeforsikring",
+                        "pris_mdr": "85 kr./md",
+                        "dækning": "Ansvarsforsikring med mulighed for udvidelse",
+                        "tilvalg": [
+                                "Udvidet ansvar",
+                                "Sygeforsikring"
+                        ],
+                        "kampagne": "Første måned gratis",
+                        "link": "https://www.tryg.dk/",
+                        "last_updated": "2025-10-02T00:51:25.465Z",
+                        "source": "mock_data",
+                        "link_updated": "2025-10-02T02:57:37.455Z",
+                        "previous_link": "https://www.tryg.dk/forsikring/hund",
+                        "kommuner": [
+                                "København",
+                                "Odense",
+                                "Aarhus",
+                                "Aalborg"
+                        ]
+                },
+                {
+                        "udbyder": "Alka Forsikring",
+                        "produkt": "Alka Hund Ansvar",
+                        "pris_mdr": "75 kr./md",
+                        "dækning": "Basis hundeansvarsforsikring",
+                        "tilvalg": [
+                                "Sygeforsikring",
+                                "Livsforsikring"
+                        ],
+                        "kampagne": "Ingen selvrisiko ved første skade",
+                        "link": "https://www.alka.dk/",
+                        "last_updated": "2025-10-02T00:51:27.467Z",
+                        "source": "mock_data",
+                        "link_updated": "2025-10-02T02:56:00.000Z",
+                        "kommuner": [
+                                "København",
+                                "Odense",
+                                "Aarhus",
+                                "Aalborg"
+                        ]
+                },
+                {
+                        "udbyder": "GF Forsikring",
+                        "produkt": "GF Hundeforsikring",
+                        "pris_mdr": "89 kr./md",
+                        "dækning": "Obligatorisk ansvarsforsikring + valgfri udvidelser",
+                        "tilvalg": [
+                                "Sygeforsikring",
+                                "Udvidet ansvar",
+                                "Medicindækning"
+                        ],
+                        "kampagne": "Rabat ved flere kæledyr",
+                        "link": "https://www.gf.dk/",
+                        "last_updated": "2025-10-02T00:51:29.471Z",
+                        "source": "mock_data",
+                        "link_fixed": "2025-10-02T02:29:28.257Z",
+                        "original_link": "https://www.gf.dk/hund",
+                        "kommuner": [
+                                "København",
+                                "Odense",
+                                "Aarhus",
+                                "Aalborg"
+                        ]
+                },
+                {
+                        "udbyder": "Dyrekassen Danmark",
+                        "produkt": "Dyrekassen Hund Basis",
+                        "pris_mdr": "95 kr./md",
+                        "dækning": "Ansvar + mulighed for sygdom og tandskader",
+                        "tilvalg": [
+                                "Sygeforsikring",
+                                "Operationer",
+                                "Udvidet tanddækning"
+                        ],
+                        "kampagne": "Gratis rådgivning inkluderet",
+                        "link": "https://www.dyrekassen.dk/",
+                        "last_updated": "2025-10-02T00:51:31.473Z",
+                        "source": "mock_data",
+                        "kommuner": [
+                                "København",
+                                "Odense",
+                                "Aarhus",
+                                "Aalborg"
+                        ]
+                },
+                {
+                        "udbyder": "Topdanmark",
+                        "produkt": "Topdanmark Hundeforsikring",
+                        "pris_mdr": "99 kr./md",
+                        "dækning": "Hundansvar med mulighed for sygdom og tandbehandling",
+                        "tilvalg": [
+                                "Sygeforsikring",
+                                "Livsforsikring",
+                                "Tandbehandling"
+                        ],
+                        "kampagne": "Samlingsrabat ved husstandsforsikringer",
+                        "link": "https://www.topdanmark.dk/",
+                        "last_updated": "2025-10-02T00:51:33.475Z",
+                        "source": "mock_data",
+                        "kommuner": [
+                                "København",
+                                "Odense",
+                                "Aarhus",
+                                "Aalborg"
+                        ]
+                },
+                {
+                        "udbyder": "Codan",
+                        "produkt": "Codan Hundeforsikring",
+                        "pris_mdr": "82 kr./md",
+                        "dækning": "Hundeansvarsforsikring med udvidelser",
+                        "tilvalg": [
+                                "Sygeforsikring",
+                                "Tanddækning"
+                        ],
+                        "kampagne": "Ny kunde rabat",
+                        "link": "https://www.codan.dk/",
+                        "last_updated": "2025-10-02T00:51:35.477Z",
+                        "source": "mock_data",
+                        "link_fixed": "2025-10-02T02:29:40.626Z",
+                        "original_link": "https://www.codan.dk/forsikring/hundeforsikring",
+                        "kommuner": [
+                                "København",
+                                "Odense",
+                                "Aarhus",
+                                "Aalborg"
+                        ]
+                },
+                {
+                        "udbyder": "Gjensidige",
+                        "produkt": "Gjensidige Hundeforsikring",
+                        "pris_mdr": "88 kr./md",
+                        "dækning": "Ansvar med mulighed for sygdom",
+                        "tilvalg": [
+                                "Sygeforsikring",
+                                "Udvidet ansvar"
+                        ],
+                        "kampagne": "Online bestilling rabat",
+                        "link": "https://www.gjensidige.dk/",
+                        "last_updated": "2025-10-02T00:51:37.480Z",
+                        "source": "mock_data",
+                        "link_fixed": "2025-10-02T02:29:47.755Z",
+                        "original_link": "https://www.gjensidige.dk/forsikring/hundeforsikring",
+                        "kommuner": [
+                                "København",
+                                "Odense",
+                                "Aarhus",
+                                "Aalborg"
+                        ]
+                }
+        ];
+let kommunerData = ["Aarhus", "Aalborg", "Odense", "København", "Esbjerg", "Randers", "Kolding", "Horsens", "Vejle", "Roskilde", "Herning", "Silkeborg", "Næstved", "Fredericia", "Viborg", "Køge", "Holstebro", "Slagelse", "Hillerød", "Ballerup", "Rødovre", "Glostrup", "Brøndby", "Hvidovre", "Gentofte", "Lyngby-Taarbæk", "Gladsaxe", "Rudersdal", "Furesø", "Allerød", "Fredensborg", "Helsingør", "Hørsholm", "Frederikssund", "Egedal", "Frederiksværk-Hundested", "Greve", "Solrød", "Lejre", "Holbæk", "Kalundborg", "Ringsted", "Sorø", "Vordingborg", "Guldborgsund", "Lolland", "Bornholm", "Haderslev", "Billund", "Sønderborg", "Tønder", "Fanø", "Varde", "Vejen", "Aabenraa", "Ikast-Brande", "Ringkøbing-Skjern", "Lemvig", "Struer", "Syddjurs", "Norddjurs", "Favrskov", "Odder", "Samsø", "Assens", "Faaborg-Midtfyn", "Kerteminde", "Nyborg", "Svendborg", "Nordfyns", "Langeland", "Ærø", "Brønderslev", "Frederikshavn", "Hjørring", "Jammerbugt", "Læsø", "Mariagerfjord", "Morsø", "Rebild", "Thisted", "Vesthimmerland", "Skive", "Høje-Taastrup", "Ishøj", "Tårnby", "Dragør", "Halsnæs", "Gribskov", "Odsherred", "Faxe", "Stevns", "Høje-Taastrup", "Ishøj", "Tårnby", "Dragør", "Halsnæs", "Gribskov"];
 
 document.addEventListener('DOMContentLoaded', function() {
     console.log('DOM loaded, initializing...');
@@ -105,9 +281,15 @@ function initializeWithHardcodedData() {
     // Initialize kommuner data
     kommunerData = [
         "Aarhus", "Aalborg", "Odense", "København", "Esbjerg", "Randers", "Kolding", "Horsens", "Vejle", "Roskilde",
-        "Herning", "Silkeborg", "Næstved", "Fredericia", "Viborg", "Køge", "Holstebro", "Taastrup", "Slagelse", "Hillerød",
-        "Ballerup", "Rødovre", "Glostrup", "Brøndby", "Hvidovre", "Gentofte", "Lyngby-Taarbæk", "Gladsaxe", "Rudersdal", "Furesø",
-        "Allerød", "Fredensborg", "Helsingør", "Hørsholm", "Frederikssund", "Egedal", "Frederiksværk-Hundested", "Greve", "Solrød", "Lejre"
+        "Herning", "Silkeborg", "Næstved", "Fredericia", "Viborg", "Køge", "Holstebro", "Slagelse", "Hillerød", "Ballerup",
+        "Rødovre", "Glostrup", "Brøndby", "Hvidovre", "Gentofte", "Lyngby-Taarbæk", "Gladsaxe", "Rudersdal", "Furesø", "Allerød",
+        "Fredensborg", "Helsingør", "Hørsholm", "Frederikssund", "Egedal", "Frederiksværk-Hundested", "Greve", "Solrød", "Lejre", "Holbæk",
+        "Kalundborg", "Ringsted", "Sorø", "Vordingborg", "Guldborgsund", "Lolland", "Bornholm", "Haderslev", "Billund", "Sønderborg",
+        "Tønder", "Fanø", "Varde", "Vejen", "Aabenraa", "Ikast-Brande", "Ringkøbing-Skjern", "Lemvig", "Struer", "Syddjurs",
+        "Norddjurs", "Favrskov", "Odder", "Samsø", "Assens", "Faaborg-Midtfyn", "Kerteminde", "Nyborg", "Svendborg", "Nordfyns",
+        "Langeland", "Ærø", "Brønderslev", "Frederikshavn", "Hjørring", "Jammerbugt", "Læsø", "Mariagerfjord", "Morsø", "Rebild",
+        "Thisted", "Vesthimmerland", "Skive", "Høje-Taastrup", "Ishøj", "Tårnby", "Dragør", "Halsnæs", "Gribskov", "Odsherred",
+        "Faxe", "Stevns"
     ];
     
     // Populate the table immediately
