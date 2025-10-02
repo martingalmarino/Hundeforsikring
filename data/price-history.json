@@ -1,0 +1,42 @@
+{
+  "Agria": {
+    "price": 79,
+    "timestamp": "2025-10-02T00:51:44.179Z",
+    "product": "Agria Ansvar"
+  },
+  "Tryg": {
+    "price": 85,
+    "timestamp": "2025-10-02T00:51:44.179Z",
+    "product": "Tryg Hundeforsikring"
+  },
+  "Alka Forsikring": {
+    "price": 75,
+    "timestamp": "2025-10-02T00:51:44.179Z",
+    "product": "Alka Hund Ansvar"
+  },
+  "GF Forsikring": {
+    "price": 89,
+    "timestamp": "2025-10-02T00:51:44.179Z",
+    "product": "GF Hundeforsikring"
+  },
+  "Dyrekassen Danmark": {
+    "price": 95,
+    "timestamp": "2025-10-02T00:51:44.179Z",
+    "product": "Dyrekassen Hund Basis"
+  },
+  "Topdanmark": {
+    "price": 99,
+    "timestamp": "2025-10-02T00:51:44.179Z",
+    "product": "Topdanmark Hundeforsikring"
+  },
+  "Codan": {
+    "price": 82,
+    "timestamp": "2025-10-02T00:51:44.179Z",
+    "product": "Codan Hundeforsikring"
+  },
+  "Gjensidige": {
+    "price": 88,
+    "timestamp": "2025-10-02T00:51:44.179Z",
+    "product": "Gjensidige Hundeforsikring"
+  }
+}

@@ -23,8 +23,8 @@
   "author": "Martin Galmarino",
   "license": "MIT",
   "devDependencies": {
-    "vercel": "^32.0.0",
-    "jsdom": "^23.0.0"
+    "jsdom": "^23.2.0",
+    "vercel": "^32.0.0"
   },
   "engines": {
     "node": ">=18.0.0"
