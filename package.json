@@ -6,7 +6,12 @@
   "scripts": {
     "dev": "vercel dev",
     "build": "echo 'Static site - no build needed'",
-    "start": "vercel dev"
+    "start": "vercel dev",
+    "generate-kommuner": "node scripts/generate-kommune-pages.js",
+    "scrape-data": "node scripts/scrape-insurance-data.js",
+    "validate-data": "node scripts/validate-data.js",
+    "monitor-prices": "node scripts/price-monitor.js",
+    "update-all": "npm run scrape-data && npm run validate-data && npm run monitor-prices"
   },
   "keywords": [
     "hundeforsikring",
@@ -18,7 +23,8 @@
   "author": "Martin Galmarino",
   "license": "MIT",
   "devDependencies": {
-    "vercel": "^32.0.0"
+    "vercel": "^32.0.0",
+    "jsdom": "^23.0.0"
   },
   "engines": {
     "node": ">=18.0.0"
