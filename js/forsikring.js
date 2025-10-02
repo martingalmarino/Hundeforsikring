@@ -506,19 +506,24 @@ function populateKommuneGrid() {
         `;
     }).join('');
 
-    // Add "Show more" button if there are more kommuner
+    // Add "Show more" button if there are more kommuner and it doesn't exist
     if (window.kommunerData.length > 24) {
+        // Check if button already exists
+        const existingButton = kommuneGrid.parentNode.querySelector('.show-more-button-container');
+        if (!existingButton) {
         const showMoreBtn = document.createElement('button');
         showMoreBtn.className = 'btn btn-secondary';
-        showMoreBtn.textContent = 'Vis alle 98 kommuner';
+            showMoreBtn.textContent = 'Vis alle 98 kommuner';
         showMoreBtn.onclick = showAllForsikringKommuner;
         
         const showMoreContainer = document.createElement('div');
+            showMoreContainer.className = 'show-more-button-container';
         showMoreContainer.style.textAlign = 'center';
         showMoreContainer.style.marginTop = '2rem';
         showMoreContainer.appendChild(showMoreBtn);
         
         kommuneGrid.parentNode.appendChild(showMoreContainer);
+        }
     }
 }
 
@@ -541,7 +546,7 @@ function showAllForsikringKommuner() {
     }).join('');
 
     // Remove the "Show more" button
-    const showMoreContainer = kommuneGrid.parentNode.querySelector('div[style*="text-align: center"]');
+    const showMoreContainer = kommuneGrid.parentNode.querySelector('.show-more-button-container');
     if (showMoreContainer) {
         showMoreContainer.remove();
     }
