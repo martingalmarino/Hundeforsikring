@@ -217,8 +217,8 @@ const kommuneTemplate = `<!DOCTYPE html>
         </div>
     </footer>
 
-    <script src="../../js/main.js"></script>
-    <script src="../../js/forsikring.js"></script>
+    <script src="../../js/main.js?v=20250102"></script>
+    <script src="../../js/forsikring.js?v=20250102"></script>
     <script>
         // Set kommune-specific data
         window.currentKommune = '{KOMMUNE}';
