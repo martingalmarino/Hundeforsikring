@@ -75,7 +75,21 @@
         
         console.log('✅ Table body found, generating HTML...');
         
-        const html = forsikringData.map(item => {
+        const html = forsikringData.map((item, index) => {
+            let buttonClass = 'btn btn-primary btn-sm';
+            
+            // Assign special classes based on price tier
+            if (index === 0) {
+                // Cheapest - best price
+                buttonClass += ' best-price';
+            } else if (index === forsikringData.length - 1) {
+                // Most expensive - premium
+                buttonClass += ' premium';
+            } else {
+                // Standard pricing
+                buttonClass += ' standard';
+            }
+            
             return `
                 <tr>
                     <td><strong>${item.udbyder}</strong></td>
@@ -84,7 +98,7 @@
                     <td>${item.dækning}</td>
                     <td class="tilvalg">${item.tilvalg.join(', ')}</td>
                     <td><span class="campaign">${item.kampagne}</span></td>
-                    <td><a href="${item.link}" class="btn btn-primary btn-sm" target="_blank" rel="nofollow">Se tilbud</a></td>
+                    <td><a href="${item.link}" class="${buttonClass}" target="_blank" rel="nofollow"><i class="fas fa-external-link-alt"></i> Se tilbud</a></td>
                 </tr>
             `;
         }).join('');

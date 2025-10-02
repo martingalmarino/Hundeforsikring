@@ -866,16 +866,108 @@ body {
 }
 
 .btn-sm {
-    padding: 0.6rem 1rem;
-    font-size: 0.85rem;
-    border-radius: 6px;
-    transition: all 0.3s ease;
-    font-weight: 500;
+    padding: 0.75rem 1.25rem;
+    font-size: 0.9rem;
+    border-radius: 8px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-width: 120px;
+    background: linear-gradient(135deg, var(--primary-color), #2E7D32);
+    color: white;
+    box-shadow: 0 2px 8px rgba(46, 125, 50, 0.2);
+}
+
+.btn-sm::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
 }
 
 .btn-sm:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(46, 125, 50, 0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(46, 125, 50, 0.4);
+    background: linear-gradient(135deg, #1B5E20, var(--primary-color));
+}
+
+.btn-sm:hover::before {
+    left: 100%;
+}
+
+.btn-sm:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(46, 125, 50, 0.3);
+}
+
+.btn-sm i {
+    font-size: 0.8rem;
+    opacity: 0.9;
+}
+
+/* Special button styles for different price tiers */
+.btn-sm.best-price {
+    background: linear-gradient(135deg, #FF6B35, #F7931E);
+    box-shadow: 0 2px 8px rgba(255, 107, 53, 0.3);
+}
+
+.btn-sm.best-price:hover {
+    background: linear-gradient(135deg, #E55A2B, #FF6B35);
+    box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
+}
+
+.btn-sm.premium {
+    background: linear-gradient(135deg, #6A1B9A, #8E24AA);
+    box-shadow: 0 2px 8px rgba(106, 27, 154, 0.3);
+}
+
+.btn-sm.premium:hover {
+    background: linear-gradient(135deg, #4A148C, #6A1B9A);
+    box-shadow: 0 6px 20px rgba(106, 27, 154, 0.4);
+}
+
+.btn-sm.standard {
+    background: linear-gradient(135deg, var(--primary-color), #2E7D32);
+    box-shadow: 0 2px 8px rgba(46, 125, 50, 0.2);
+}
+
+.btn-sm.standard:hover {
+    background: linear-gradient(135deg, #1B5E20, var(--primary-color));
+    box-shadow: 0 6px 20px rgba(46, 125, 50, 0.4);
+}
+
+/* Button loading state */
+.btn-sm.loading {
+    pointer-events: none;
+    opacity: 0.7;
+}
+
+.btn-sm.loading::after {
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top: 2px solid white;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
 /* Mobile Cards Layout */
