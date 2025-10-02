@@ -960,9 +960,10 @@ body {
 /* Coverage Comparison Table */
 .coverage-table-container {
     overflow-x: auto;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     margin-bottom: 3rem;
+    background: white;
 }
 
 .coverage-table {
@@ -970,21 +971,21 @@ body {
     min-width: 900px;
     border-collapse: collapse;
     background: white;
-    border-radius: 12px;
+    border-radius: 8px;
     overflow: hidden;
 }
 
 .coverage-table th,
 .coverage-table td {
-    padding: 1rem;
+    padding: 1rem 0.75rem;
     text-align: left;
-    border-bottom: 1px solid #f0f0f0;
+    border-bottom: 1px solid #e0e0e0;
     vertical-align: middle;
 }
 
 .coverage-header {
-    background: linear-gradient(135deg, var(--primary-color), #1B5E20);
-    color: white;
+    background: #f5f5f5;
+    color: #333;
     font-weight: 600;
     font-size: 1rem;
     position: sticky;
@@ -994,8 +995,8 @@ body {
 }
 
 .provider-header {
-    background: linear-gradient(135deg, var(--secondary-color), #0D47A1);
-    color: white;
+    background: #f5f5f5;
+    color: #333;
     font-weight: 600;
     font-size: 0.9rem;
     text-align: center;
@@ -1003,11 +1004,19 @@ body {
 }
 
 .coverage-table tbody tr {
-    transition: all 0.2s ease;
+    transition: background-color 0.2s ease;
 }
 
 .coverage-table tbody tr:hover {
-    background: #f8f9fa;
+    background: #f9f9f9;
+}
+
+.coverage-table tbody tr:nth-child(even) {
+    background: #fafafa;
+}
+
+.coverage-table tbody tr:nth-child(even):hover {
+    background: #f0f0f0;
 }
 
 .coverage-table tbody tr:last-child td {
@@ -1016,17 +1025,8 @@ body {
 
 .coverage-item {
     font-weight: 500;
-    color: var(--text-primary);
-    position: relative;
-    padding-left: 2rem;
-}
-
-.coverage-item::before {
-    content: '▼';
-    position: absolute;
-    left: 0;
-    color: var(--primary-color);
-    font-size: 0.8rem;
+    color: #333;
+    padding-left: 0.5rem;
 }
 
 .coverage-cell {
@@ -1038,33 +1038,25 @@ body {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 24px;
-    height: 24px;
-    background: linear-gradient(135deg, var(--primary-color), #2E7D32);
+    width: 20px;
+    height: 20px;
+    background: var(--primary-color);
     border-radius: 50%;
     color: white;
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     font-weight: bold;
-    box-shadow: 0 2px 4px rgba(46, 125, 50, 0.3);
 }
 
 .no-coverage {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
     color: #ccc;
-    font-size: 1.2rem;
+    font-size: 1rem;
     font-weight: bold;
 }
-
-.coverage-table .provider-header:nth-child(2) { background: linear-gradient(135deg, #FF6B35, #F7931E); }
-.coverage-table .provider-header:nth-child(3) { background: linear-gradient(135deg, var(--primary-color), #2E7D32); }
-.coverage-table .provider-header:nth-child(4) { background: linear-gradient(135deg, var(--secondary-color), #0D47A1); }
-.coverage-table .provider-header:nth-child(5) { background: linear-gradient(135deg, #6A1B9A, #8E24AA); }
-.coverage-table .provider-header:nth-child(6) { background: linear-gradient(135deg, #D32F2F, #F44336); }
-.coverage-table .provider-header:nth-child(7) { background: linear-gradient(135deg, #455A64, #607D8B); }
 
 /* Mobile Cards Layout */
 .mobile-cards {
