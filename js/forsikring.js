@@ -325,7 +325,7 @@ function populateKommuneGrid() {
     if (kommunerData.length > 24) {
         const showMoreBtn = document.createElement('button');
         showMoreBtn.className = 'btn btn-secondary';
-        showMoreBtn.textContent = 'Vis alle kommuner';
+        showMoreBtn.textContent = 'Vis alle 98 kommuner';
         showMoreBtn.onclick = showAllForsikringKommuner;
         
         const showMoreContainer = document.createElement('div');

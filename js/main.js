@@ -1,7 +1,7 @@
 // Main JavaScript functionality for Hundeforsikring.dk
 
 // Global data storage
-let kommunerData = [];
+let kommunerData = ['Aarhus', 'Aalborg', 'Odense', 'København', 'Esbjerg', 'Randers', 'Kolding', 'Horsens', 'Vejle', 'Roskilde', 'Herning', 'Silkeborg', 'Næstved', 'Fredericia', 'Viborg', 'Køge', 'Holstebro', 'Slagelse', 'Hillerød', 'Ballerup', 'Rødovre', 'Glostrup', 'Brøndby', 'Hvidovre', 'Gentofte', 'Lyngby-Taarbæk', 'Gladsaxe', 'Rudersdal', 'Furesø', 'Allerød', 'Fredensborg', 'Helsingør', 'Hørsholm', 'Frederikssund', 'Egedal', 'Frederiksværk-Hundested', 'Greve', 'Solrød', 'Lejre', 'Holbæk', 'Kalundborg', 'Ringsted', 'Sorø', 'Vordingborg', 'Guldborgsund', 'Lolland', 'Bornholm', 'Haderslev', 'Billund', 'Sønderborg', 'Tønder', 'Fanø', 'Varde', 'Vejen', 'Aabenraa', 'Ikast-Brande', 'Ringkøbing-Skjern', 'Lemvig', 'Struer', 'Syddjurs', 'Norddjurs', 'Favrskov', 'Odder', 'Samsø', 'Assens', 'Faaborg-Midtfyn', 'Kerteminde', 'Nyborg', 'Svendborg', 'Nordfyns', 'Langeland', 'Ærø', 'Brønderslev', 'Frederikshavn', 'Hjørring', 'Jammerbugt', 'Læsø', 'Mariagerfjord', 'Morsø', 'Rebild', 'Thisted', 'Vesthimmerland', 'Skive', 'Høje-Taastrup', 'Ishøj', 'Tårnby', 'Dragør', 'Halsnæs', 'Gribskov', 'Odsherred', 'Faxe', 'Stevns', 'Høje-Taastrup', 'Ishøj', 'Tårnby', 'Dragør', 'Halsnæs', 'Gribskov'];
 
 // Initialize the application
 document.addEventListener('DOMContentLoaded', function() {
@@ -34,10 +34,7 @@ async function loadKommuneData() {
 function initializeWithHardcodedKommuneData() {
     console.log('🔄 Using hardcoded kommune data...');
     kommunerData = [
-        'København', 'Aarhus', 'Aalborg', 'Odense', 'Esbjerg', 'Randers', 'Kolding', 'Horsens',
-        'Vejle', 'Roskilde', 'Herning', 'Silkeborg', 'Næstved', 'Fredericia', 'Viborg', 'Køge',
-        'Holstebro', 'Taastrup', 'Slagelse', 'Hillerød', 'Helsingør', 'Frederikshavn',
-        'Gentofte', 'Gladsaxe', 'Brøndby', 'Rødovre', 'Hvidovre', 'Ballerup', 'Charlottenlund'
+        'Aarhus', 'Aalborg', 'Odense', 'København', 'Esbjerg', 'Randers', 'Kolding', 'Horsens', 'Vejle', 'Roskilde', 'Herning', 'Silkeborg', 'Næstved', 'Fredericia', 'Viborg', 'Køge', 'Holstebro', 'Slagelse', 'Hillerød', 'Ballerup', 'Rødovre', 'Glostrup', 'Brøndby', 'Hvidovre', 'Gentofte', 'Lyngby-Taarbæk', 'Gladsaxe', 'Rudersdal', 'Furesø', 'Allerød', 'Fredensborg', 'Helsingør', 'Hørsholm', 'Frederikssund', 'Egedal', 'Frederiksværk-Hundested', 'Greve', 'Solrød', 'Lejre', 'Holbæk', 'Kalundborg', 'Ringsted', 'Sorø', 'Vordingborg', 'Guldborgsund', 'Lolland', 'Bornholm', 'Haderslev', 'Billund', 'Sønderborg', 'Tønder', 'Fanø', 'Varde', 'Vejen', 'Aabenraa', 'Ikast-Brande', 'Ringkøbing-Skjern', 'Lemvig', 'Struer', 'Syddjurs', 'Norddjurs', 'Favrskov', 'Odder', 'Samsø', 'Assens', 'Faaborg-Midtfyn', 'Kerteminde', 'Nyborg', 'Svendborg', 'Nordfyns', 'Langeland', 'Ærø', 'Brønderslev', 'Frederikshavn', 'Hjørring', 'Jammerbugt', 'Læsø', 'Mariagerfjord', 'Morsø', 'Rebild', 'Thisted', 'Vesthimmerland', 'Skive', 'Høje-Taastrup', 'Ishøj', 'Tårnby', 'Dragør', 'Halsnæs', 'Gribskov', 'Odsherred', 'Faxe', 'Stevns'
     ];
     
     console.log('✅ Hardcoded kommune data loaded:', kommunerData.length, 'kommuner');
