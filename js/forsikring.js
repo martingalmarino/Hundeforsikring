@@ -11,12 +11,29 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeWithHardcodedData();
     
     // Populate the table immediately with hardcoded data
-    populateForsikringTable();
-    populateKommuneGrid();
+    setTimeout(() => {
+        console.log('Populating table after 100ms delay...');
+        populateForsikringTable();
+        populateKommuneGrid();
+    }, 100);
     
     // Try to load from JSON files (will work if served from web server)
     loadForsikringData();
     loadKommunerData();
+});
+
+// Also try to populate on window load as backup
+window.addEventListener('load', function() {
+    console.log('Window loaded, ensuring table is populated...');
+    if (forsikringData && forsikringData.length > 0) {
+        populateForsikringTable();
+        populateKommuneGrid();
+    } else {
+        console.log('No data available, reinitializing...');
+        initializeWithHardcodedData();
+        populateForsikringTable();
+        populateKommuneGrid();
+    }
 });
 
 // Initialize with hardcoded data
@@ -140,18 +157,20 @@ async function loadKommunerData() {
 
 // Populate forsikring comparison table
 function populateForsikringTable() {
+    console.log('=== populateForsikringTable called ===');
     const tableBody = document.getElementById('forsikringTableBody');
-    console.log('populateForsikringTable called');
-    console.log('tableBody:', tableBody);
+    console.log('tableBody element:', tableBody);
+    console.log('forsikringData length:', forsikringData ? forsikringData.length : 'undefined');
     console.log('forsikringData:', forsikringData);
     
     if (!tableBody) {
-        console.error('Table body not found');
+        console.error('❌ Table body not found - element with id "forsikringTableBody" does not exist');
+        console.log('Available elements:', document.querySelectorAll('[id*="table"]'));
         return;
     }
     
     if (!forsikringData || forsikringData.length === 0) {
-        console.log('No forsikring data available, showing placeholder');
+        console.log('⚠️ No forsikring data available, showing placeholder');
         tableBody.innerHTML = `
             <tr>
                 <td colspan="7" style="text-align: center; padding: 2rem; color: var(--text-secondary);">
@@ -191,7 +210,7 @@ function populateForsikringTable() {
         return;
     }
 
-    tableBody.innerHTML = sortedData.map(item => `
+    const tableHTML = sortedData.map(item => `
         <tr>
             <td><strong>${item.udbyder}</strong></td>
             <td>${item.produkt}</td>
@@ -203,7 +222,11 @@ function populateForsikringTable() {
         </tr>
     `).join('');
     
-    console.log('Table populated successfully');
+    console.log('Generated table HTML:', tableHTML);
+    console.log('Setting innerHTML on tableBody...');
+    tableBody.innerHTML = tableHTML;
+    console.log('✅ Table populated successfully with', sortedData.length, 'rows');
+    console.log('Table body after population:', tableBody.innerHTML);
 }
 
 // Populate kommune grid for forsikring
