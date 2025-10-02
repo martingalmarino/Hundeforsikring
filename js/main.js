@@ -165,7 +165,12 @@ function navigateToForsikringKommune(kommune) {
         .replace('å', 'aa')
         .replace(' ', '-');
     
-    window.location.href = `./forsikring/${kommuneSlug}/`;
+    // Check if we're already on a forsikring page
+    if (window.location.pathname.includes('/forsikring/')) {
+        window.location.href = `${kommuneSlug}/`;
+    } else {
+        window.location.href = `./forsikring/${kommuneSlug}/`;
+    }
 }
 
 // Initialize mobile menu
