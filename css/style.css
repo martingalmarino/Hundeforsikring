@@ -757,9 +757,17 @@ body {
 }
 
 .breadcrumb {
+    margin-top: var(--spacing-xl);
     margin-bottom: var(--spacing-lg);
     font-size: var(--font-size-sm);
     color: var(--text-secondary);
+    padding-top: var(--spacing-lg);
+}
+
+.breadcrumb-container {
+    background: var(--background);
+    padding: var(--spacing-lg) 0;
+    border-bottom: 1px solid var(--border-light);
 }
 
 .breadcrumb a {

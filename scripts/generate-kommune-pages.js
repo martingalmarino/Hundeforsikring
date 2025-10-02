@@ -70,9 +70,11 @@ const kommuneTemplate = `<!DOCTYPE html>
     </header>
 
     <!-- Breadcrumb -->
-    <div class="container">
-        <div class="breadcrumb">
-            <a href="../../">Hjem</a> <span>></span> <a href="../">Hundeforsikring</a> <span>></span> <span>{KOMMUNE}</span>
+    <div class="breadcrumb-container">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="../../">Hjem</a> <span>></span> <a href="../">Hundeforsikring</a> <span>></span> <span>{KOMMUNE}</span>
+            </div>
         </div>
     </div>
 
