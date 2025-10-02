@@ -4,7 +4,7 @@
     
     console.log('🚀 Emergency table fix script loaded');
     
-    // Data hardcoded directly here
+    // Data hardcoded directly here - Links updated to homepages to avoid 404 errors
     const forsikringData = [
         {
             "udbyder": "Alka Forsikring",
@@ -13,7 +13,7 @@
             "tilvalg": ["Sygeforsikring", "Livsforsikring"],
             "kampagne": "Ingen selvrisiko ved første skade",
             "dækning": "Basis hundeansvarsforsikring",
-            "link": "https://www.alka.dk/forsikringer/hund"
+            "link": "https://www.alka.dk/"
         },
         {
             "udbyder": "Agria",
@@ -22,7 +22,7 @@
             "tilvalg": ["Sygeforsikring", "Tanddækning", "Medicindækning"],
             "kampagne": "10% rabat ved online bestilling",
             "dækning": "Lovpligtig hundeansvarsforsikring",
-            "link": "https://www.agria.dk/hundeforsikring/"
+            "link": "https://www.agria.dk/"
         },
         {
             "udbyder": "Tryg",
@@ -31,7 +31,7 @@
             "tilvalg": ["Udvidet ansvar", "Sygeforsikring"],
             "kampagne": "Første måned gratis",
             "dækning": "Ansvarsforsikring med mulighed for udvidelse",
-            "link": "https://www.tryg.dk/forsikring/hund"
+            "link": "https://www.tryg.dk/"
         },
         {
             "udbyder": "GF Forsikring",
@@ -40,7 +40,7 @@
             "tilvalg": ["Sygeforsikring", "Udvidet ansvar", "Medicindækning"],
             "kampagne": "Rabat ved flere kæledyr",
             "dækning": "Obligatorisk ansvarsforsikring + valgfri udvidelser",
-            "link": "https://www.gf.dk/hund"
+            "link": "https://www.gf.dk/"
         },
         {
             "udbyder": "Dyrekassen Danmark",
@@ -49,7 +49,7 @@
             "tilvalg": ["Sygeforsikring", "Operationer", "Udvidet tanddækning"],
             "kampagne": "Gratis rådgivning inkluderet",
             "dækning": "Ansvar + mulighed for sygdom og tandskader",
-            "link": "https://www.dyrekassen.dk/hund/"
+            "link": "https://www.dyrekassen.dk/"
         },
         {
             "udbyder": "Topdanmark",
@@ -58,7 +58,7 @@
             "tilvalg": ["Sygeforsikring", "Livsforsikring", "Tandbehandling"],
             "kampagne": "Samlingsrabat ved husstandsforsikringer",
             "dækning": "Hundansvar med mulighed for sygdom og tandbehandling",
-            "link": "https://www.topdanmark.dk/hund"
+            "link": "https://www.topdanmark.dk/"
         }
     ];
     
