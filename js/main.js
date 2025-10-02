@@ -1,47 +1,62 @@
 // Main JavaScript functionality for Hundeforsikring.dk
 
 // Global data storage
-let forsikringData = [];
-let tandrensData = [];
 let kommunerData = [];
 
 // Initialize the application
 document.addEventListener('DOMContentLoaded', function() {
-    loadData();
-    initializeKommuneSearch();
-    initializeKommuneGrid();
+    console.log('🚀 Initializing Hundeforsikring app...');
+    loadKommuneData();
     initializeMobileMenu();
 });
 
-// Load JSON data
-async function loadData() {
+// Load kommune data
+async function loadKommuneData() {
     try {
-        const [forsikringResponse, tandrensResponse, kommunerResponse] = await Promise.all([
-            fetch('/data/hundeforsikring.json'),
-            fetch('/data/tandrens.json'),
-            fetch('/data/kommuner.json')
-        ]);
-
-        forsikringData = await forsikringResponse.json();
-        tandrensData = await tandrensResponse.json();
+        console.log('📡 Loading kommune data...');
+        const kommunerResponse = await fetch('./data/kommuner.json');
         kommunerData = await kommunerResponse.json();
-
-        console.log('Data loaded successfully:', {
-            forsikring: forsikringData.length,
-            tandrens: tandrensData.length,
-            kommuner: kommunerData.length
-        });
+        
+        console.log('✅ Kommune data loaded:', kommunerData.length, 'kommuner');
+        
+        // Initialize kommune features after data is loaded
+        initializeKommuneSearch();
+        initializeKommuneGrid();
+        
     } catch (error) {
-        console.error('Error loading data:', error);
+        console.error('❌ Error loading kommune data:', error);
+        // Fallback to hardcoded data
+        initializeWithHardcodedKommuneData();
     }
+}
+
+// Fallback hardcoded kommune data
+function initializeWithHardcodedKommuneData() {
+    console.log('🔄 Using hardcoded kommune data...');
+    kommunerData = [
+        'København', 'Aarhus', 'Aalborg', 'Odense', 'Esbjerg', 'Randers', 'Kolding', 'Horsens',
+        'Vejle', 'Roskilde', 'Herning', 'Silkeborg', 'Næstved', 'Fredericia', 'Viborg', 'Køge',
+        'Holstebro', 'Taastrup', 'Slagelse', 'Hillerød', 'Helsingør', 'Frederikshavn',
+        'Gentofte', 'Gladsaxe', 'Brøndby', 'Rødovre', 'Hvidovre', 'Ballerup', 'Charlottenlund'
+    ];
+    
+    console.log('✅ Hardcoded kommune data loaded:', kommunerData.length, 'kommuner');
+    
+    // Initialize kommune features with hardcoded data
+    initializeKommuneSearch();
+    initializeKommuneGrid();
 }
 
 // Initialize kommune search functionality
 function initializeKommuneSearch() {
+    console.log('🔍 Initializing kommune search...');
     const searchInput = document.getElementById('kommuneSearch');
     const searchResults = document.getElementById('searchResults');
 
-    if (!searchInput || !searchResults) return;
+    if (!searchInput || !searchResults) {
+        console.log('⚠️ Search elements not found');
+        return;
+    }
 
     searchInput.addEventListener('input', function() {
         const query = this.value.toLowerCase().trim();
@@ -71,27 +86,34 @@ function initializeKommuneSearch() {
             searchResults.style.display = 'none';
         }
     });
+    
+    console.log('✅ Kommune search initialized');
 }
 
 // Select kommune from search
 function selectKommune(kommune) {
+    console.log('🎯 Kommune selected:', kommune);
     document.getElementById('kommuneSearch').value = kommune;
     document.getElementById('searchResults').style.display = 'none';
     
     // Redirect to kommune page
-    window.location.href = `/forsikring/${kommune.toLowerCase()}/`;
+    navigateToForsikringKommune(kommune);
 }
 
 // Initialize kommune grid
 function initializeKommuneGrid() {
+    console.log('🏘️ Initializing kommune grid...');
     const kommuneGrid = document.getElementById('kommuneGrid');
-    if (!kommuneGrid) return;
+    if (!kommuneGrid) {
+        console.log('⚠️ Kommune grid not found');
+        return;
+    }
 
     // Show first 24 kommuner initially
     const initialKommuner = kommunerData.slice(0, 24);
     
     kommuneGrid.innerHTML = initialKommuner.map(kommune => `
-        <div class="kommune-card" onclick="navigateToKommune('${kommune}')">
+        <div class="kommune-card" onclick="navigateToForsikringKommune('${kommune}')">
             <h4>${kommune}</h4>
             <p>Se priser i ${kommune}</p>
         </div>
@@ -99,27 +121,30 @@ function initializeKommuneGrid() {
 
     // Add "Show more" button if there are more kommuner
     if (kommunerData.length > 24) {
-        const showMoreBtn = document.createElement('button');
-        showMoreBtn.className = 'btn btn-secondary';
-        showMoreBtn.textContent = 'Vis alle kommuner';
-        showMoreBtn.onclick = showAllKommuner;
-        
         const showMoreContainer = document.createElement('div');
         showMoreContainer.style.textAlign = 'center';
         showMoreContainer.style.marginTop = '2rem';
-        showMoreContainer.appendChild(showMoreBtn);
         
+        const showMoreBtn = document.createElement('button');
+        showMoreBtn.className = 'btn btn-secondary';
+        showMoreBtn.textContent = `Vis alle ${kommunerData.length} kommuner`;
+        showMoreBtn.onclick = showAllKommuner;
+        
+        showMoreContainer.appendChild(showMoreBtn);
         kommuneGrid.parentNode.appendChild(showMoreContainer);
     }
+    
+    console.log('✅ Kommune grid initialized with', initialKommuner.length, 'kommuner');
 }
 
 // Show all kommuner
 function showAllKommuner() {
+    console.log('📋 Showing all kommuner...');
     const kommuneGrid = document.getElementById('kommuneGrid');
     if (!kommuneGrid) return;
 
     kommuneGrid.innerHTML = kommunerData.map(kommune => `
-        <div class="kommune-card" onclick="navigateToKommune('${kommune}')">
+        <div class="kommune-card" onclick="navigateToForsikringKommune('${kommune}')">
             <h4>${kommune}</h4>
             <p>Se priser i ${kommune}</p>
         </div>
@@ -130,202 +155,58 @@ function showAllKommuner() {
     if (showMoreContainer) {
         showMoreContainer.remove();
     }
+    
+    console.log('✅ All kommuner displayed');
 }
 
-// Navigate to kommune page
-function navigateToKommune(kommune) {
+// Navigate to forsikring kommune page
+function navigateToForsikringKommune(kommune) {
+    console.log('🔗 Navigating to forsikring page for:', kommune);
     const kommuneSlug = kommune.toLowerCase()
-        .replace(/ø/g, 'o')
-        .replace(/æ/g, 'ae')
-        .replace(/å/g, 'a')
-        .replace(/[^a-z0-9]/g, '-');
+        .replace('ø', 'o')
+        .replace('æ', 'ae')
+        .replace('å', 'aa')
+        .replace(' ', '-');
     
-    window.location.href = `/forsikring/${kommuneSlug}/`;
+    window.location.href = `./forsikring/${kommuneSlug}/`;
 }
 
 // Initialize mobile menu
 function initializeMobileMenu() {
-    const navToggle = document.querySelector('.nav-toggle');
-    const navMenu = document.querySelector('.nav-menu');
+    console.log('📱 Initializing mobile menu...');
+    const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
 
-    if (!navToggle || !navMenu) return;
+    if (!mobileMenuToggle || !mobileMenu) {
+        console.log('⚠️ Mobile menu elements not found');
+        return;
+    }
 
-    navToggle.addEventListener('click', function() {
-        navMenu.classList.toggle('active');
-        navToggle.classList.toggle('active');
+    mobileMenuToggle.addEventListener('click', function() {
+        mobileMenu.classList.toggle('active');
+        this.classList.toggle('active');
     });
 
-    // Close menu when clicking on a link
-    const navLinks = document.querySelectorAll('.nav-link');
-    navLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            navMenu.classList.remove('active');
-            navToggle.classList.remove('active');
+    // Close mobile menu when clicking on a link
+    const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+    mobileMenuLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            mobileMenu.classList.remove('active');
+            mobileMenuToggle.classList.remove('active');
         });
     });
-}
-
-// Utility function to format prices
-function formatPrice(price) {
-    return new Intl.NumberFormat('da-DK', {
-        style: 'currency',
-        currency: 'DKK',
-        minimumFractionDigits: 0,
-        maximumFractionDigits: 0
-    }).format(price);
-}
-
-// Utility function to format monthly price
-function formatMonthlyPrice(price) {
-    return `${formatPrice(price)}/md`;
-}
-
-// Filter forsikring data by kommune
-function getForsikringByKommune(kommune) {
-    return forsikringData.filter(item => 
-        item.kommuner.includes(kommune)
-    );
-}
-
-// Filter tandrens data by kommune
-function getTandrensByKommune(kommune) {
-    return tandrensData.filter(item => 
-        item.kommune === kommune
-    );
-}
-
-// Get cheapest forsikring for kommune
-function getCheapestForsikring(kommune) {
-    const forsikringForKommune = getForsikringByKommune(kommune);
-    if (forsikringForKommune.length === 0) return null;
     
-    return forsikringForKommune.reduce((cheapest, current) => 
-        current.pris_mdr < cheapest.pris_mdr ? current : cheapest
-    );
+    console.log('✅ Mobile menu initialized');
 }
 
-// Get cheapest tandrens for kommune
-function getCheapestTandrens(kommune) {
-    const tandrensForKommune = getTandrensByKommune(kommune);
-    if (tandrensForKommune.length === 0) return null;
-    
-    return tandrensForKommune.reduce((cheapest, current) => 
-        current.pris < cheapest.pris ? current : cheapest
-    );
+// Utility function to get cheapest price for a kommune
+function getCheapestPriceForKommune(kommune) {
+    // This would typically fetch from forsikringData
+    // For now, return a placeholder
+    return '75 kr./md';
 }
 
-// Get average price for tandrens in kommune
-function getAverageTandrensPrice(kommune) {
-    const tandrensForKommune = getTandrensByKommune(kommune);
-    if (tandrensForKommune.length === 0) return null;
-    
-    const total = tandrensForKommune.reduce((sum, item) => sum + item.pris, 0);
-    return Math.round(total / tandrensForKommune.length);
-}
-
-// Generate comparison table HTML for forsikring
-function generateForsikringTable(forsikringData) {
-    if (!forsikringData || forsikringData.length === 0) {
-        return '<p>Ingen forsikringsselskaber fundet for denne kommune.</p>';
-    }
-
-    return `
-        <div class="table-container">
-            <table class="comparison-table">
-                <thead>
-                    <tr>
-                        <th>Udbyder</th>
-                        <th>Produkt</th>
-                        <th>Pris/måned</th>
-                        <th>Dækning</th>
-                        <th>Tilvalg</th>
-                        <th>Kampagne</th>
-                        <th>Handling</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    ${forsikringData.map(item => `
-                        <tr>
-                            <td><strong>${item.udbyder}</strong></td>
-                            <td>${item.produkt}</td>
-                            <td><span class="price">${formatMonthlyPrice(item.pris_mdr)}</span></td>
-                            <td>${item.dækning}</td>
-                            <td>${item.tilvalg.join(', ')}</td>
-                            <td><span class="campaign">${item.kampagne}</span></td>
-                            <td><a href="${item.link}" class="btn btn-primary btn-sm" target="_blank" rel="nofollow">Se tilbud</a></td>
-                        </tr>
-                    `).join('')}
-                </tbody>
-            </table>
-        </div>
-    `;
-}
-
-// Generate comparison table HTML for tandrens
-function generateTandrensTable(tandrensData) {
-    if (!tandrensData || tandrensData.length === 0) {
-        return '<p>Ingen dyrelægeklinikker fundet for denne kommune.</p>';
-    }
-
-    return `
-        <div class="table-container">
-            <table class="comparison-table">
-                <thead>
-                    <tr>
-                        <th>Klinik</th>
-                        <th>Pris</th>
-                        <th>Adresse</th>
-                        <th>Telefon</th>
-                        <th>Rating</th>
-                        <th>Handling</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    ${tandrensData.map(item => `
-                        <tr>
-                            <td><strong>${item.klinik}</strong></td>
-                            <td><span class="price">${formatPrice(item.pris)}</span></td>
-                            <td>${item.adresse}</td>
-                            <td><a href="tel:${item.telefon}">${item.telefon}</a></td>
-                            <td><span class="rating">${item.rating}/5</span></td>
-                            <td><a href="${item.website}" class="btn btn-primary btn-sm" target="_blank" rel="nofollow">Besøg klinik</a></td>
-                        </tr>
-                    `).join('')}
-                </tbody>
-            </table>
-        </div>
-    `;
-}
-
-// Generate FAQ JSON-LD
-function generateFAQJSONLD(kommune, questions) {
-    return {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "mainEntity": questions.map(q => ({
-            "@type": "Question",
-            "name": q.question,
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": q.answer
-            }
-        }))
-    };
-}
-
-// Export functions for use in other pages
-window.HundeforsikringUtils = {
-    formatPrice,
-    formatMonthlyPrice,
-    getForsikringByKommune,
-    getTandrensByKommune,
-    getCheapestForsikring,
-    getCheapestTandrens,
-    getAverageTandrensPrice,
-    generateForsikringTable,
-    generateTandrensTable,
-    generateFAQJSONLD,
-    navigateToKommune,
-    selectKommune
-};
-
+// Export functions for global access
+window.selectKommune = selectKommune;
+window.navigateToForsikringKommune = navigateToForsikringKommune;
+window.showAllKommuner = showAllKommuner;
