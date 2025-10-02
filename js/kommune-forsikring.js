@@ -1,203 +1,216 @@
 // JavaScript for kommune-specific forsikring pages
 
+// Global variables for data
+let forsikringData = [];
+let currentKommune = '';
+
 document.addEventListener('DOMContentLoaded', function() {
-    // Wait for data to be loaded
+    console.log('🏘️ Kommune page loaded, initializing...');
+    
+    // Get current kommune from window object (set by page)
+    currentKommune = window.currentKommune || '';
+    console.log('📍 Current kommune:', currentKommune);
+    
+    // Initialize with hardcoded data immediately
+    initializeWithHardcodedData();
+    
+    // Populate the table immediately
     setTimeout(() => {
-        initializeKommuneForsikring();
-    }, 1000);
+        console.log('📊 Populating kommune table...');
+        populateKommuneForsikringTable();
+    }, 100);
+    
+    // Try to load from JSON files
+    loadForsikringData();
 });
 
-// Initialize kommune forsikring page
-function initializeKommuneForsikring() {
-    const kommune = getKommuneFromURL();
-    if (!kommune) {
-        console.error('Could not determine kommune from URL');
-        return;
+// Also try to populate on window load as backup
+window.addEventListener('load', function() {
+    console.log('🔄 Window loaded, ensuring kommune table is populated...');
+    if (forsikringData && forsikringData.length > 0) {
+        populateKommuneForsikringTable();
+    } else {
+        console.log('🔄 No data available, reinitializing...');
+        initializeWithHardcodedData();
+        populateKommuneForsikringTable();
     }
+});
 
-    // Update page content with kommune-specific data
-    updateKommuneContent(kommune);
-    populateForsikringTable(kommune);
-    updateHeroStats(kommune);
-    initializeFAQ();
-}
-
-// Get kommune from URL
-function getKommuneFromURL() {
-    const path = window.location.pathname;
-    const segments = path.split('/');
-    const kommuneSlug = segments[segments.length - 2]; // Get second to last segment
+// Initialize with hardcoded data
+function initializeWithHardcodedData() {
+    console.log('💾 Initializing with hardcoded data...');
     
-    // Convert slug back to kommune name
-    const kommune = kommuneSlug
-        .split('-')
-        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-        .join(' ')
-        .replace(/O/g, 'Ø')
-        .replace(/Ae/g, 'Æ')
-        .replace(/A/g, 'Å');
-    
-    return kommune;
-}
-
-// Update kommune-specific content
-function updateKommuneContent(kommune) {
-    // Update page title and meta descriptions
-    document.title = document.title.replace('{KOMMUNE}', kommune);
-    
-    // Update all {KOMMUNE} placeholders
-    const kommuneElements = document.querySelectorAll('[data-kommune]');
-    kommuneElements.forEach(element => {
-        element.textContent = kommune;
-    });
-    
-    // Update content with kommune name
-    const contentElements = document.querySelectorAll('h1, h2, h3, p, li');
-    contentElements.forEach(element => {
-        if (element.textContent.includes('{KOMMUNE}')) {
-            element.textContent = element.textContent.replace(/{KOMMUNE}/g, kommune);
+    forsikringData = [
+        {
+            udbyder: 'Agria',
+            produkt: 'Agria Ansvar',
+            pris_mdr: '79 kr./md',
+            tilvalg: ['Sygeforsikring', 'Tanddækning', 'Medicindækning'],
+            kampagne: '10% rabat ved online bestilling',
+            dækning: 'Lovpligtig hundeansvarsforsikring',
+            link: 'https://www.agria.dk/hundeforsikring/'
+        },
+        {
+            udbyder: 'Tryg',
+            produkt: 'Tryg Hundeforsikring',
+            pris_mdr: '85 kr./md',
+            dækning: 'Ansvarsforsikring med mulighed for udvidelse',
+            tilvalg: ['Udvidet ansvar', 'Sygeforsikring'],
+            kampagne: 'Første måned gratis',
+            link: 'https://www.tryg.dk/forsikring/hund'
+        },
+        {
+            udbyder: 'Dyrekassen Danmark',
+            produkt: 'Dyrekassen Hund Basis',
+            pris_mdr: '95 kr./md',
+            dækning: 'Ansvar + mulighed for sygdom og tandskader',
+            tilvalg: ['Sygeforsikring', 'Operationer', 'Udvidet tanddækning'],
+            kampagne: 'Gratis rådgivning inkluderet',
+            link: 'https://www.dyrekassen.dk/hund/'
+        },
+        {
+            udbyder: 'Alka Forsikring',
+            produkt: 'Alka Hund Ansvar',
+            pris_mdr: '75 kr./md',
+            dækning: 'Basis hundeansvarsforsikring',
+            tilvalg: ['Sygeforsikring', 'Livsforsikring'],
+            kampagne: 'Ingen selvrisiko ved første skade',
+            link: 'https://www.alka.dk/forsikringer/hund'
+        },
+        {
+            udbyder: 'GF Forsikring',
+            produkt: 'GF Hundeforsikring',
+            pris_mdr: '89 kr./md',
+            dækning: 'Obligatorisk ansvarsforsikring + valgfri udvidelser',
+            tilvalg: ['Sygeforsikring', 'Udvidet ansvar', 'Medicindækning'],
+            kampagne: 'Rabat ved flere kæledyr',
+            link: 'https://www.gf.dk/hund'
+        },
+        {
+            udbyder: 'Topdanmark',
+            produkt: 'Topdanmark Hundeforsikring',
+            pris_mdr: '99 kr./md',
+            dækning: 'Hundansvar med mulighed for sygdom og tandbehandling',
+            tilvalg: ['Sygeforsikring', 'Livsforsikring', 'Tandbehandling'],
+            kampagne: 'Samlingsrabat ved husstandsforsikringer',
+            link: 'https://www.topdanmark.dk/hund'
+        },
+        {
+            udbyder: 'Codan',
+            produkt: 'Codan Hundeforsikring',
+            pris_mdr: '82 kr./md',
+            dækning: 'Hundeansvarsforsikring med udvidelser',
+            tilvalg: ['Sygeforsikring', 'Tanddækning'],
+            kampagne: 'Ny kunde rabat',
+            link: 'https://www.codan.dk/forsikring/hundeforsikring'
+        },
+        {
+            udbyder: 'Gjensidige',
+            produkt: 'Gjensidige Hundeforsikring',
+            pris_mdr: '88 kr./md',
+            dækning: 'Ansvar med mulighed for sygdom',
+            tilvalg: ['Sygeforsikring', 'Udvidet ansvar'],
+            kampagne: 'Online bestilling rabat',
+            link: 'https://www.gjensidige.dk/forsikring/hundeforsikring'
         }
+    ];
+    
+    console.log('✅ Hardcoded data initialized:', forsikringData.length, 'providers');
+}
+
+// Load forsikring data from JSON
+async function loadForsikringData() {
+    try {
+        console.log('📡 Loading forsikring data from JSON...');
+        const response = await fetch('./data/hundeforsikring.json');
+        if (response.ok) {
+            const data = await response.json();
+            forsikringData = data;
+            console.log('✅ Forsikring data loaded from JSON:', forsikringData.length, 'providers');
+            
+            // Repopulate table with fresh data
+            populateKommuneForsikringTable();
+        } else {
+            console.log('⚠️ JSON file not found, using hardcoded data');
+        }
+    } catch (error) {
+        console.log('⚠️ Error loading JSON data:', error.message, '- using hardcoded data');
+    }
+}
+
+// Populate kommune-specific forsikring table
+function populateKommuneForsikringTable() {
+    console.log('📊 Populating kommune forsikring table for:', currentKommune);
+    
+    const tableBody = document.getElementById('forsikringTableBody');
+    if (!tableBody) {
+        console.log('❌ Table body not found');
+        return;
+    }
+    
+    if (!forsikringData || forsikringData.length === 0) {
+        console.log('❌ No forsikring data available');
+        tableBody.innerHTML = '<tr><td colspan="7" style="text-align: center; padding: 2rem; color: #666;">Ingen data tilgængelig</td></tr>';
+        return;
+    }
+    
+    // Sort data by price (cheapest first)
+    const sortedData = [...forsikringData].sort((a, b) => {
+        const priceA = parseInt(a.pris_mdr.replace(/[^\d]/g, ''));
+        const priceB = parseInt(b.pris_mdr.replace(/[^\d]/g, ''));
+        return priceA - priceB;
     });
-}
-
-// Populate forsikring table for specific kommune
-function populateForsikringTable(kommune) {
-    const tableContainer = document.getElementById('forsikringTableContainer');
-    if (!tableContainer || !forsikringData) return;
-
-    const forsikringForKommune = getForsikringByKommune(kommune);
     
-    if (forsikringForKommune.length === 0) {
-        tableContainer.innerHTML = `
-            <div class="no-data">
-                <i class="fas fa-info-circle"></i>
-                <h3>Ingen forsikringsselskaber fundet</h3>
-                <p>Vi har ikke fundet forsikringsselskaber, der dækker ${kommune}. Prøv at kontakte forsikringsselskaberne direkte.</p>
-            </div>
-        `;
-        return;
-    }
-
-    // Sort by price (cheapest first)
-    const sortedData = [...forsikringForKommune].sort((a, b) => a.pris_mdr - b.pris_mdr);
-
-    const tableHTML = `
-        <div class="table-container">
-            <table class="comparison-table">
-                <thead>
-                    <tr>
-                        <th>Udbyder</th>
-                        <th>Produkt</th>
-                        <th>Pris/måned</th>
-                        <th>Dækning</th>
-                        <th>Tilvalg</th>
-                        <th>Kampagne</th>
-                        <th>Handling</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    ${sortedData.map(item => `
-                        <tr>
-                            <td><strong>${item.udbyder}</strong></td>
-                            <td>${item.produkt}</td>
-                            <td><span class="price">${formatMonthlyPrice(item.pris_mdr)}</span></td>
-                            <td>${item.dækning}</td>
-                            <td>${item.tilvalg.join(', ')}</td>
-                            <td><span class="campaign">${item.kampagne}</span></td>
-                            <td><a href="${item.link}" class="btn btn-primary btn-sm" target="_blank" rel="nofollow">Se tilbud</a></td>
-                        </tr>
-                    `).join('')}
-                </tbody>
-            </table>
-        </div>
-    `;
-
-    tableContainer.innerHTML = tableHTML;
-}
-
-// Update hero stats with kommune-specific data
-function updateHeroStats(kommune) {
-    const heroStats = document.getElementById('heroStats');
-    if (!heroStats) return;
-
-    const forsikringForKommune = getForsikringByKommune(kommune);
-    const cheapestForsikring = getCheapestForsikring(kommune);
+    console.log('📈 Sorted data by price:', sortedData.map(item => `${item.udbyder}: ${item.pris_mdr}`));
     
-    if (forsikringForKommune.length === 0) {
-        heroStats.innerHTML = `
-            <div class="stat">
-                <span class="stat-number">0</span>
-                <span class="stat-label">Forsikringsselskaber</span>
-            </div>
-            <div class="stat">
-                <span class="stat-number">Kontakt</span>
-                <span class="stat-label">Direkte</span>
-            </div>
-            <div class="stat">
-                <span class="stat-number">100%</span>
-                <span class="stat-label">Gratis sammenligning</span>
-            </div>
-        `;
-        return;
-    }
-
-    const cheapestPrice = cheapestForsikring ? formatMonthlyPrice(cheapestForsikring.pris_mdr) : 'Kontakt';
-
-    heroStats.innerHTML = `
-        <div class="stat">
-            <span class="stat-number">${forsikringForKommune.length}</span>
-            <span class="stat-label">Forsikringsselskaber</span>
-        </div>
-        <div class="stat">
-            <span class="stat-number">${cheapestPrice}</span>
-            <span class="stat-label">Billigste pris</span>
-        </div>
-        <div class="stat">
-            <span class="stat-number">100%</span>
-            <span class="stat-label">Gratis sammenligning</span>
-        </div>
-    `;
-}
-
-// Initialize FAQ functionality
-function initializeFAQ() {
-    const faqItems = document.querySelectorAll('.faq-item');
-    
-    faqItems.forEach(item => {
-        const question = item.querySelector('.faq-question');
-        const answer = item.querySelector('.faq-answer');
-        const icon = item.querySelector('.fa-chevron-down');
+    const html = sortedData.map((item, index) => {
+        // Assign button classes based on price tier
+        let buttonClass = 'btn btn-primary btn-sm standard';
         
-        if (question && answer && icon) {
-            question.addEventListener('click', () => {
-                const isActive = item.classList.contains('active');
-                
-                // Close all other FAQ items
-                faqItems.forEach(otherItem => {
-                    otherItem.classList.remove('active');
-                    const otherAnswer = otherItem.querySelector('.faq-answer');
-                    const otherIcon = otherItem.querySelector('.fa-chevron-down');
-                    if (otherAnswer && otherIcon) {
-                        otherAnswer.style.maxHeight = null;
-                        otherIcon.style.transform = 'rotate(0deg)';
-                    }
-                });
-                
-                // Toggle current item
-                if (!isActive) {
-                    item.classList.add('active');
-                    answer.style.maxHeight = answer.scrollHeight + 'px';
-                    icon.style.transform = 'rotate(180deg)';
-                } else {
-                    item.classList.remove('active');
-                    answer.style.maxHeight = null;
-                    icon.style.transform = 'rotate(0deg)';
-                }
-            });
+        if (index === 0) {
+            buttonClass = 'btn btn-primary btn-sm best-price';
+        } else if (index === 1) {
+            buttonClass = 'btn btn-primary btn-sm premium';
         }
-    });
+        
+        return `
+            <tr>
+                <td><strong>${item.udbyder}</strong></td>
+                <td>${item.produkt}</td>
+                <td><span class="price">${item.pris_mdr}</span></td>
+                <td>${item.dækning}</td>
+                <td>${item.tilvalg.join(', ')}</td>
+                <td><span class="campaign">${item.kampagne}</span></td>
+                <td><a href="${item.link}" class="${buttonClass}" target="_blank" rel="nofollow"><i class="fas fa-external-link-alt"></i> Se tilbud</a></td>
+            </tr>
+        `;
+    }).join('');
+    
+    tableBody.innerHTML = html;
+    console.log('✅ Kommune table populated successfully with', sortedData.length, 'rows');
+    
+    // Update page title with kommune info
+    updatePageTitle();
 }
 
-// Export functions for global use
-window.initializeKommuneForsikring = initializeKommuneForsikring;
+// Update page title with kommune-specific info
+function updatePageTitle() {
+    if (!currentKommune) return;
+    
+    const cheapest = forsikringData.reduce((min, item) => {
+        const price = parseInt(item.pris_mdr.replace(/[^\d]/g, ''));
+        const minPrice = parseInt(min.pris_mdr.replace(/[^\d]/g, ''));
+        return price < minPrice ? item : min;
+    }, forsikringData[0]);
+    
+    console.log('🏆 Cheapest provider in', currentKommune + ':', cheapest.udbyder, cheapest.pris_mdr);
+    
+    // Update any dynamic content if needed
+    const cheapestElement = document.querySelector('.cheapest-price');
+    if (cheapestElement) {
+        cheapestElement.textContent = cheapest.pris_mdr;
+    }
+}
 
+// Export functions for global access
+window.populateKommuneForsikringTable = populateKommuneForsikringTable;
