@@ -118,17 +118,21 @@ function initializeKommuneGrid() {
 
     // Add "Show more" button if there are more kommuner
     if (kommunerData.length > 24) {
-        const showMoreContainer = document.createElement('div');
-        showMoreContainer.style.textAlign = 'center';
-        showMoreContainer.style.marginTop = '2rem';
-        
-        const showMoreBtn = document.createElement('button');
-        showMoreBtn.className = 'btn btn-secondary';
-        showMoreBtn.textContent = `Vis alle ${kommunerData.length} kommuner`;
-        showMoreBtn.onclick = showAllKommuner;
-        
-        showMoreContainer.appendChild(showMoreBtn);
-        kommuneGrid.parentNode.appendChild(showMoreContainer);
+        // Check if button already exists to prevent duplicates
+        const existingButton = kommuneGrid.parentNode.querySelector('button[onclick="showAllKommuner()"]');
+        if (!existingButton) {
+            const showMoreContainer = document.createElement('div');
+            showMoreContainer.style.textAlign = 'center';
+            showMoreContainer.style.marginTop = '2rem';
+            
+            const showMoreBtn = document.createElement('button');
+            showMoreBtn.className = 'btn btn-secondary';
+            showMoreBtn.textContent = `Vis alle ${kommunerData.length} kommuner`;
+            showMoreBtn.onclick = showAllKommuner;
+            
+            showMoreContainer.appendChild(showMoreBtn);
+            kommuneGrid.parentNode.appendChild(showMoreContainer);
+        }
     }
     
     console.log('✅ Kommune grid initialized with', initialKommuner.length, 'kommuner');
