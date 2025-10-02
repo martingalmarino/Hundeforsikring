@@ -189,8 +189,73 @@ function populateKommuneForsikringTable() {
     tableBody.innerHTML = html;
     console.log('✅ Kommune table populated successfully with', sortedData.length, 'rows');
     
+    // Also populate mobile cards
+    populateMobileCards(sortedData);
+    
     // Update page title with kommune info
     updatePageTitle();
+}
+
+// Populate mobile cards for kommune pages
+function populateMobileCards(data) {
+    console.log('📱 Populating mobile cards for kommune...');
+    const mobileCardsContainer = document.getElementById('mobileCards');
+    
+    if (!mobileCardsContainer) {
+        console.log('⚠️ Mobile cards container not found');
+        return;
+    }
+    
+    const cardsHTML = data.map((item, index) => {
+        // Assign button classes based on price tier
+        let buttonClass = 'btn btn-primary standard';
+        
+        if (index === 0) {
+            buttonClass = 'btn btn-primary best-price';
+        } else if (index === 1) {
+            buttonClass = 'btn btn-primary premium';
+        }
+        
+        return `
+            <div class="insurance-card">
+                <div class="card-header">
+                    <div class="card-provider">
+                        <h3>${item.udbyder}</h3>
+                        <p class="card-product">${item.produkt}</p>
+                    </div>
+                    <div class="card-price">
+                        <span class="price">${item.pris_mdr}</span>
+                    </div>
+                </div>
+                
+                <div class="card-content">
+                    <div class="card-section">
+                        <h4>Dækning</h4>
+                        <p>${item.dækning}</p>
+                    </div>
+                    
+                    <div class="card-section">
+                        <h4>Tilvalg</h4>
+                        <p>${item.tilvalg.join(', ')}</p>
+                    </div>
+                    
+                    <div class="card-section">
+                        <h4>Kampagne</h4>
+                        <p class="campaign">${item.kampagne}</p>
+                    </div>
+                </div>
+                
+                <div class="card-action">
+                    <a href="${item.link}" class="${buttonClass}" target="_blank" rel="nofollow">
+                        <i class="fas fa-external-link-alt"></i> Se tilbud
+                    </a>
+                </div>
+            </div>
+        `;
+    }).join('');
+    
+    mobileCardsContainer.innerHTML = cardsHTML;
+    console.log('✅ Mobile cards populated successfully with', data.length, 'cards');
 }
 
 // Update page title with kommune-specific info

@@ -114,6 +114,7 @@ const kommuneTemplate = `<!DOCTYPE html>
                     <p class="section-subtitle">Alle priser er fra 2025 og kan variere afhængigt af hundens race og alder.</p>
                 </div>
                 
+                <!-- Desktop Table -->
                 <div class="table-container">
                     <table class="comparison-table" id="forsikringTable">
                         <thead>
@@ -131,6 +132,11 @@ const kommuneTemplate = `<!DOCTYPE html>
                             <!-- Populated by JavaScript -->
                         </tbody>
                     </table>
+                </div>
+                
+                <!-- Mobile Cards Layout -->
+                <div class="mobile-cards" id="mobileCards">
+                    <!-- Populated by JavaScript -->
                 </div>
             </section>
 
