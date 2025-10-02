@@ -178,7 +178,10 @@ let forsikringData =         [
                         ]
                 }
         ];
-let kommunerData = ["Aarhus", "Aalborg", "Odense", "København", "Esbjerg", "Randers", "Kolding", "Horsens", "Vejle", "Roskilde", "Herning", "Silkeborg", "Næstved", "Fredericia", "Viborg", "Køge", "Holstebro", "Slagelse", "Hillerød", "Ballerup", "Rødovre", "Glostrup", "Brøndby", "Hvidovre", "Gentofte", "Lyngby-Taarbæk", "Gladsaxe", "Rudersdal", "Furesø", "Allerød", "Fredensborg", "Helsingør", "Hørsholm", "Frederikssund", "Egedal", "Frederiksværk-Hundested", "Greve", "Solrød", "Lejre", "Holbæk", "Kalundborg", "Ringsted", "Sorø", "Vordingborg", "Guldborgsund", "Lolland", "Bornholm", "Haderslev", "Billund", "Sønderborg", "Tønder", "Fanø", "Varde", "Vejen", "Aabenraa", "Ikast-Brande", "Ringkøbing-Skjern", "Lemvig", "Struer", "Syddjurs", "Norddjurs", "Favrskov", "Odder", "Samsø", "Assens", "Faaborg-Midtfyn", "Kerteminde", "Nyborg", "Svendborg", "Nordfyns", "Langeland", "Ærø", "Brønderslev", "Frederikshavn", "Hjørring", "Jammerbugt", "Læsø", "Mariagerfjord", "Morsø", "Rebild", "Thisted", "Vesthimmerland", "Skive", "Høje-Taastrup", "Ishøj", "Tårnby", "Dragør", "Halsnæs", "Gribskov", "Odsherred", "Faxe", "Stevns", "Høje-Taastrup", "Ishøj", "Tårnby", "Dragør", "Halsnæs", "Gribskov"];
+// Use global kommunerData from main.js, initialize if not exists
+if (typeof window.kommunerData === 'undefined') {
+    window.kommunerData = ["Aarhus", "Aalborg", "Odense", "København", "Esbjerg", "Randers", "Kolding", "Horsens", "Vejle", "Roskilde", "Herning", "Silkeborg", "Næstved", "Fredericia", "Viborg", "Køge", "Holstebro", "Slagelse", "Hillerød", "Ballerup", "Rødovre", "Glostrup", "Brøndby", "Hvidovre", "Gentofte", "Lyngby-Taarbæk", "Gladsaxe", "Rudersdal", "Furesø", "Allerød", "Fredensborg", "Helsingør", "Hørsholm", "Frederikssund", "Egedal", "Frederiksværk-Hundested", "Greve", "Solrød", "Lejre", "Holbæk", "Kalundborg", "Ringsted", "Sorø", "Vordingborg", "Guldborgsund", "Lolland", "Bornholm", "Haderslev", "Billund", "Sønderborg", "Tønder", "Fanø", "Varde", "Vejen", "Aabenraa", "Ikast-Brande", "Ringkøbing-Skjern", "Lemvig", "Struer", "Syddjurs", "Norddjurs", "Favrskov", "Odder", "Samsø", "Assens", "Faaborg-Midtfyn", "Kerteminde", "Nyborg", "Svendborg", "Nordfyns", "Langeland", "Ærø", "Brønderslev", "Frederikshavn", "Hjørring", "Jammerbugt", "Læsø", "Mariagerfjord", "Morsø", "Rebild", "Thisted", "Vesthimmerland", "Skive", "Høje-Taastrup", "Ishøj", "Tårnby", "Dragør", "Halsnæs", "Gribskov", "Odsherred", "Faxe", "Stevns"];
+}
 
 document.addEventListener('DOMContentLoaded', function() {
     console.log('DOM loaded, initializing...');
@@ -329,7 +332,7 @@ async function loadKommunerData() {
         
         const jsonData = await response.json();
         console.log('Kommuner JSON data loaded successfully, updating grid...');
-        kommunerData = jsonData;
+        window.kommunerData = jsonData;
         populateKommuneGrid();
     } catch (error) {
         console.log('Could not load kommuner from JSON file, using hardcoded data instead');
@@ -482,13 +485,13 @@ function populateMobileCards(data) {
 // Populate kommune grid for forsikring
 function populateKommuneGrid() {
     const kommuneGrid = document.getElementById('kommuneGrid');
-    if (!kommuneGrid || !kommunerData || kommunerData.length === 0) {
+    if (!kommuneGrid || !window.kommunerData || window.kommunerData.length === 0) {
         console.log('No kommune data available');
         return;
     }
 
     // Show first 24 kommuner initially
-    const initialKommuner = kommunerData.slice(0, 24);
+    const initialKommuner = window.kommunerData.slice(0, 24);
     
     kommuneGrid.innerHTML = initialKommuner.map(kommune => {
         const cheapestForsikring = getCheapestForsikring(kommune);
@@ -504,7 +507,7 @@ function populateKommuneGrid() {
     }).join('');
 
     // Add "Show more" button if there are more kommuner
-    if (kommunerData.length > 24) {
+    if (window.kommunerData.length > 24) {
         const showMoreBtn = document.createElement('button');
         showMoreBtn.className = 'btn btn-secondary';
         showMoreBtn.textContent = 'Vis alle 98 kommuner';
@@ -522,9 +525,9 @@ function populateKommuneGrid() {
 // Show all kommuner for forsikring
 function showAllForsikringKommuner() {
     const kommuneGrid = document.getElementById('kommuneGrid');
-    if (!kommuneGrid || !kommunerData) return;
+    if (!kommuneGrid || !window.kommunerData) return;
 
-    kommuneGrid.innerHTML = kommunerData.map(kommune => {
+    kommuneGrid.innerHTML = window.kommunerData.map(kommune => {
         const cheapestForsikring = getCheapestForsikring(kommune);
         const priceText = cheapestForsikring ? `Fra ${cheapestForsikring.pris_mdr}` : 'Se priser';
         
