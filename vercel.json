@@ -6,26 +6,18 @@
       "use": "@vercel/static"
     }
   ],
-  "routes": [
+  "rewrites": [
     {
-      "src": "/",
-      "dest": "/index.html"
+      "source": "/forsikring/(.*)",
+      "destination": "/forsikring/$1/index.html"
     },
     {
-      "src": "/forsikring/(.*)",
-      "dest": "/forsikring/$1/index.html"
+      "source": "/guide/(.*)",
+      "destination": "/guide/$1/index.html"
     },
     {
-      "src": "/guide/(.*)",
-      "dest": "/guide/$1/index.html"
-    },
-    {
-      "src": "/faq",
-      "dest": "/faq/index.html"
-    },
-    {
-      "src": "/(.*\\.(js|css|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|eot))",
-      "dest": "/$1"
+      "source": "/faq",
+      "destination": "/faq/index.html"
     }
   ],
   "headers": [
