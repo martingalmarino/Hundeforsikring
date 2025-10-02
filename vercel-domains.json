@@ -1,0 +1,23 @@
+{
+  "domains": [
+    "hundeforsikring.dk",
+    "www.hundeforsikring.dk"
+  ],
+  "redirects": [
+    {
+      "source": "/forsikring",
+      "destination": "/forsikring/",
+      "permanent": true
+    },
+    {
+      "source": "/guide",
+      "destination": "/guide/",
+      "permanent": true
+    },
+    {
+      "source": "/faq",
+      "destination": "/faq/",
+      "permanent": true
+    }
+  ]
+}
