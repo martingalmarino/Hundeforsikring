@@ -5,6 +5,7 @@
   "main": "index.html",
   "scripts": {
     "dev": "vercel dev",
+    "local": "node start-local.js",
     "build": "echo 'Static site - no build needed'",
     "start": "vercel dev",
     "generate-kommuner": "node scripts/generate-kommune-pages.js",
