@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
     setTimeout(() => {
         console.log('Populating table after 100ms delay...');
         populateForsikringTable();
+        populateCoverageTable();
         populateKommuneGrid();
     }, 100);
     
@@ -27,11 +28,13 @@ window.addEventListener('load', function() {
     console.log('Window loaded, ensuring table is populated...');
     if (forsikringData && forsikringData.length > 0) {
         populateForsikringTable();
+        populateCoverageTable();
         populateKommuneGrid();
     } else {
         console.log('No data available, reinitializing...');
         initializeWithHardcodedData();
         populateForsikringTable();
+        populateCoverageTable();
         populateKommuneGrid();
     }
 });
@@ -295,6 +298,80 @@ function populateMobileCards(data) {
     
     mobileCardsContainer.innerHTML = cardsHTML;
     console.log('✅ Mobile cards populated successfully with', data.length, 'cards');
+}
+
+// Populate coverage comparison table
+function populateCoverageTable() {
+    console.log('📋 Populating coverage table...');
+    const coverageTableBody = document.getElementById('coverageTableBody');
+    
+    if (!coverageTableBody) {
+        console.log('Coverage table body not found');
+        return;
+    }
+    
+    // Define coverage items and their availability for each provider
+    const coverageItems = [
+        {
+            name: 'Hundeansvarsforsikring',
+            providers: ['Alka Forsikring', 'Agria', 'Tryg', 'GF Forsikring', 'Dyrekassen Danmark', 'Topdanmark']
+        },
+        {
+            name: 'Sygeforsikring',
+            providers: ['Alka Forsikring', 'Agria', 'Tryg', 'GF Forsikring', 'Dyrekassen Danmark', 'Topdanmark']
+        },
+        {
+            name: 'Tanddækning',
+            providers: ['Agria', 'GF Forsikring', 'Dyrekassen Danmark', 'Topdanmark']
+        },
+        {
+            name: 'Medicindækning',
+            providers: ['Agria', 'GF Forsikring']
+        },
+        {
+            name: 'Livsforsikring',
+            providers: ['Alka Forsikring', 'Topdanmark']
+        },
+        {
+            name: 'Udvidet ansvar',
+            providers: ['Tryg', 'GF Forsikring']
+        },
+        {
+            name: 'Operationer',
+            providers: ['Dyrekassen Danmark']
+        },
+        {
+            name: 'Udvidet tanddækning',
+            providers: ['Dyrekassen Danmark']
+        },
+        {
+            name: 'Tandbehandling',
+            providers: ['Topdanmark']
+        }
+    ];
+    
+    const providerNames = ['Alka Forsikring', 'Agria', 'Tryg', 'GF Forsikring', 'Dyrekassen Danmark', 'Topdanmark'];
+    
+    const coverageHTML = coverageItems.map(item => {
+        const cells = providerNames.map(provider => {
+            const hasCoverage = item.providers.includes(provider);
+            return `
+                <td class="coverage-cell">
+                    ${hasCoverage ? '<span class="checkmark">✓</span>' : '<span class="no-coverage">—</span>'}
+                </td>
+            `;
+        }).join('');
+        
+        return `
+            <tr>
+                <td class="coverage-item">${item.name}</td>
+                ${cells}
+            </tr>
+        `;
+    }).join('');
+    
+    coverageTableBody.innerHTML = coverageHTML;
+    console.log('✅ Coverage table populated successfully with', coverageItems.length, 'coverage items');
 }
 
 // Populate kommune grid for forsikring
